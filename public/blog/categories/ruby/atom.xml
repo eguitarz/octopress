@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-03-25T18:02:27+08:00</updated>
+  <updated>2012-03-25T21:58:07+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -28,6 +28,7 @@
 <li>Github帳號 (包含git工具，請參考<a href="http://help.github.com/mac-set-up-git/">這裡</a>)</li>
 <li>RVM (可以擁有多重Ruby版本的套件，安裝方式可以<a href="http://octopress.org/docs/setup/rvm/">看這</a>)</li>
 <li>Ruby 1.9.2 (比較舊版的Ruby，請透過RVM安裝)</li>
+<li>(optional) Heroku帳號，用來發佈你的web，也可以發佈到Github。</li>
 <li>充滿好奇心的小腦袋</li>
 </ul>
 

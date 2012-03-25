@@ -12,10 +12,10 @@ categories: Ruby Rails
 
 在開始之前，需要準備以下工具：
 
-
 * Github帳號 (包含git工具，請參考[這裡](http://help.github.com/mac-set-up-git/))
 * RVM (可以擁有多重Ruby版本的套件，安裝方式可以[看這](http://octopress.org/docs/setup/rvm/))
 * Ruby 1.9.2 (比較舊版的Ruby，請透過RVM安裝)
+* (optional) Heroku帳號，用來發佈你的web，也可以發佈到Github。
 * 充滿好奇心的小腦袋
 
 ### Step 1. Install Ruby
