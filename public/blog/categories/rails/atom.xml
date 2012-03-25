@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Dale Ma]]></title>
-  <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Rails | Dale Ma]]></title>
+  <link href="http://dale-ma.heroku.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
   <updated>2012-03-25T18:02:27+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
@@ -18,7 +18,7 @@
     <link href="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress/"/>
     <updated>2012-03-25T14:05:00+08:00</updated>
     <id>http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress</id>
-    <content type="html"><![CDATA[<p>被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的&#8221;Octopress&#8221;。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。</p>
+    <content type="html"><![CDATA[<p>被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的"Octopress"。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。</p>
 
 <p><a href="http://octopress.org"><img class="right" src="http://octopress.org/images/logo.png"></a></p>
 
