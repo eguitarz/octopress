@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-03-25T22:19:25+08:00</updated>
+  <updated>2012-03-28T09:01:14+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails - 6 篇文上軌道]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/03/28/6-articles-to-rails/"/>
+    <updated>2012-03-28T08:55:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/03/28/6-articles-to-rails</id>
+    <content type="html"><![CDATA[<p>你覺得假日生活無聊，想找點新樂子，但聰明如你不想和凡夫俗子一樣在夜店泡上一整晚，也許可以開始Ruby on Railse的學習之路。如果你有網站程式的背景，那底下這幾篇文章大概4小時內就可以消化完畢‧可以學到</p>
+
+<ul>
+<li><p>安裝Ruby on Rails的最佳做法</p></li>
+<li><p>Ruby的語法</p></li>
+<li><p>用Rails框架實做含資料庫的網站</p></li>
+<li><p>Rails開發者常用的套件(gems)</p></li>
+</ul>
+
+
+<p><a href="http://blog.eddie.com.tw/2011/04/08/rvm-and-gemsets/">RVM and Gemsets</a></p>
+
+<p>RVM是Ruby developer必備的實驗室，可以準備很多不同版本的Ruby來跑Project。每個Project的環境需求都不盡相同，有了RVM就不必煩惱在不同環境間切換的困擾。這篇教你如何安裝RVM。</p>
+
+<p><a href="http://ihower.tw/rails3/installation.html">安裝Rails開發環境</a></p>
+
+<p>安裝Rails、資料庫，介紹開發環境和Gems。</p>
+
+<p><a href="http://www.ruby-lang.org/zh_TW/documentation/quickstart/">二十分鐘 Ruby 體驗</a></p>
+
+<p>非常精美的Ruby教學文件，讓你知道Ruby可不是珠寶店裡的紅寶石&#8230;</p>
+
+<p><a href="http://ihower.tw/rails3/basic.html">打造 CRUD 應用程式</a></p>
+
+<p>和下面一篇是連貫的，先實作完這篇的程式，再看下篇。這篇是Rails新手的重點文章。</p>
+
+<p><a href="http://ihower.tw/rails3/restful.html">RESTful 應用程式</a></p>
+
+<p>主要是講RESTful在rails下怎麼達成。看完後你已經可以100%唬住Rails門外漢了！</p>
+
+<p><a href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/">十個 Ruby Web Developer 應該熟悉的工具</a></p>
+
+<p>我認為Git是裡面最需要也最花時間來熟悉的，git init, git add, git commit, git branch, git checkout等是git很常用到的指令。從svn轉戰git會發現有很多觀念不同，不小心就會誤用。</p>
+
+<h3>More gems…</h3>
+
+<p>Rails有很多前人寫好的套件，花在了解套件的時間上甚至會比寫自己的code還多。</p>
+
+<ul>
+<li><a href="https://github.com/chriseppstein/compass">compass</a> (SCSS強化版，簡單想就是用變數和類物件導向的CSS)</li>
+<li><a href="https://github.com/plataformatec/devise">devise</a> (認證工具，代表不用刻登入、登出的UI和邏輯，YAY!!)</li>
+<li><a href="https://github.com/plataformatec/simple_form">simple_form</a> (堪稱比Rails內建form_for更好用)</li>
+<li><a href="https://github.com/amatsuda/kaminari">kaminari</a> (分頁工具，資料多的時候不需要自己寫分頁邏輯)</li>
+<li><a href="https://github.com/dchelimsky/rspec">rspec</a> (比unit test更厲害的Behavioral Driven Development測試工具)</li>
+<li><a href="https://github.com/cucumber/cucumber">cucumber</a> (Behavioral Driven Development的工具，先讓你寫說明文件再開發，說明文件是程式化的語法，跟rspec是好夥伴)</li>
+</ul>
+
+
+<h3>Fun projects…</h3>
+
+<p><a href="https://github.com/imathis/octopress">octopress</a>
+有趣的部落格軟體，不需要用資料庫，而是用git來控制文章，十分適合hacker的玩具。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress - 章魚先生，你好]]></title>
