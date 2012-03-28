@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-03-28T09:01:14+08:00</updated>
+  <updated>2012-03-28T09:12:06+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -28,27 +28,27 @@
 </ul>
 
 
-<p><a href="http://blog.eddie.com.tw/2011/04/08/rvm-and-gemsets/">RVM and Gemsets</a></p>
+<h3><a href="http://blog.eddie.com.tw/2011/04/08/rvm-and-gemsets/">RVM and Gemsets</a></h3>
 
 <p>RVM是Ruby developer必備的實驗室，可以準備很多不同版本的Ruby來跑Project。每個Project的環境需求都不盡相同，有了RVM就不必煩惱在不同環境間切換的困擾。這篇教你如何安裝RVM。</p>
 
-<p><a href="http://ihower.tw/rails3/installation.html">安裝Rails開發環境</a></p>
+<h3><a href="http://ihower.tw/rails3/installation.html">安裝Rails開發環境</a></h3>
 
 <p>安裝Rails、資料庫，介紹開發環境和Gems。</p>
 
-<p><a href="http://www.ruby-lang.org/zh_TW/documentation/quickstart/">二十分鐘 Ruby 體驗</a></p>
+<h3><a href="http://www.ruby-lang.org/zh_TW/documentation/quickstart/">二十分鐘 Ruby 體驗</a></h3>
 
 <p>非常精美的Ruby教學文件，讓你知道Ruby可不是珠寶店裡的紅寶石&#8230;</p>
 
-<p><a href="http://ihower.tw/rails3/basic.html">打造 CRUD 應用程式</a></p>
+<h3><a href="http://ihower.tw/rails3/basic.html">打造 CRUD 應用程式</a></h3>
 
 <p>和下面一篇是連貫的，先實作完這篇的程式，再看下篇。這篇是Rails新手的重點文章。</p>
 
-<p><a href="http://ihower.tw/rails3/restful.html">RESTful 應用程式</a></p>
+<h3><a href="http://ihower.tw/rails3/restful.html">RESTful 應用程式</a></h3>
 
 <p>主要是講RESTful在rails下怎麼達成。看完後你已經可以100%唬住Rails門外漢了！</p>
 
-<p><a href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/">十個 Ruby Web Developer 應該熟悉的工具</a></p>
+<h3><a href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/">十個 Ruby Web Developer 應該熟悉的工具</a></h3>
 
 <p>我認為Git是裡面最需要也最花時間來熟悉的，git init, git add, git commit, git branch, git checkout等是git很常用到的指令。從svn轉戰git會發現有很多觀念不同，不小心就會誤用。</p>
 
