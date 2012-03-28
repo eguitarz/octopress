@@ -3,7 +3,7 @@ layout: post
 title: "Octopress - 章魚先生，你好"
 date: 2012-03-25 14:05
 comments: true
-categories: Ruby Rails
+categories: ruby rails
 ---
 
 被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的"Octopress"。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。
