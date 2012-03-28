@@ -3,7 +3,8 @@ layout: post
 title: "Ruby on Rails - 6 篇文上軌道"
 date: 2012-03-28 08:55
 comments: true
-categories: ruby rails
+categories:
+- Ruby on Rails
 ---
 你覺得假日生活無聊，想找點新樂子，但聰明如你不想和凡夫俗子一樣在夜店泡上一整晚，也許可以開始Ruby on Railse的學習之路。如果你有網站程式的背景，那底下這幾篇文章大概4小時內就可以消化完畢‧可以學到
 
