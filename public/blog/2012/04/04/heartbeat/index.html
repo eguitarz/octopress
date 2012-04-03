@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress - 章魚先生，你好 - Dale Ma</title>
+  <title>Heartbeat Install Guide - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的&#8221;Octopress&#8221;。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。 在開始之前，需要準備以下工具： Github帳號 (包含git工具，請參考這裡)
-RVM ( &hellip;">
+  <meta name="description" content="What - The use of Heartbeat Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ RVM ( &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +81,7 @@ RVM ( &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Octopress - 章魚先生，你好</h1>
+      <h1 class="entry-title">Heartbeat Install Guide</h1>
     
     
       <p class="meta">
@@ -98,79 +97,175 @@ RVM ( &hellip;">
   
 
 
-<time datetime="2012-03-25T14:05:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的&#8221;Octopress&#8221;。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。</p>
+<div class="entry-content"><h2>What - The use of Heartbeat</h2>
 
-<p><a href="http://octopress.org"><img class="right" src="http://octopress.org/images/logo.png"></a></p>
+<p>Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and once if it had been shutdown accidently, then the service will stop. There&#8217;s a workaround for this situation, prepare Server_2 and duplicate the service settings on it. Install Heartbeat on both of them. When Heartbeat starts working on both servers, it provides a virtual ip. If any one of servers stop working, the other one will takeover the job.</p>
 
-<p>在開始之前，需要準備以下工具：</p>
+<p>The clients are linking to the virtual ip, they don&#8217;t know the server has been shutdown. Heartbeat guarantees the service will keep serving clients when any one of its server is alive.</p>
+
+<h2>How - Install Heartbeat</h2>
+
+<h3>Environment</h3>
+
+<p>Server_1</p>
 
 <ul>
-<li>Github帳號 (包含git工具，請參考<a href="http://help.github.com/mac-set-up-git/">這裡</a>)</li>
-<li>RVM (可以擁有多重Ruby版本的套件，安裝方式可以<a href="http://octopress.org/docs/setup/rvm/">看這</a>)</li>
-<li>Ruby 1.9.2 (比較舊版的Ruby，請透過RVM安裝)</li>
-<li>(optional) Heroku帳號，用來發佈你的web，也可以發佈到Github。</li>
-<li>充滿好奇心的小腦袋</li>
+<li>CentOS 5.6</li>
+<li>ip: 192.168.0.1</li>
 </ul>
 
 
-<h3>Step 1. Install Ruby</h3>
-
-<pre><code>rvm install 1.9.2
-# 下面無法安裝的解法比較花時間，快速的話可以直接下rvm install 1.9.2 --with-gcc=clang
-rvm use 1.9.2
-</code></pre>
-
-<p>如果是Mac可能會遇到gcc是LLVM裝不上的問題，可以看這篇<a href="http://blog.yorkxin.org/2012/03/09/ruby-192-with-xcode-43/">解法</a>或你覺得時間很寶貴，可以直接下</p>
-
-<pre><code>rvm install 1.9.2 --with-gcc=clang
-</code></pre>
-
-<h3>Step 2. Checkout</h3>
-
-<pre><code>cd /PATH/TO/YOUR/DIRECTORY
-git clone git://github.com/imathis/octopress.git # 建議可以先將Octopress Fork到自己的帳戶下再Clone，將來如果想修改核心比較方便
-</code></pre>
-
-<h3>Step 3. Install Octopress</h3>
-
-<pre><code>cd octopress
-bundle install
-rake install
-</code></pre>
-
-<h3>Step 4. Configure</h3>
-
-<p>剛開始只需要修改_config.yml即可，可參考<a href="http://octopress.org/docs/configuring/">官網config教學</a></p>
-
-<h3>Step 5. Post</h3>
-
-<pre><code>rake new_post[YOUR_POST_NAME]
-</code></pre>
-
-<h3>Step 6. Preview</h3>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>然後你就可以看到章魚先生在你的電腦上呈現出你的部落格了！接著你可以發佈到Heroku去，詳細步驟可以參考<a href="http://blog.eddie.com.tw/2011/10/11/how-to-install-octopress-on-heroku/">這裡</a></p>
-
-<h3>完成以上步驟，就可以開始拆解這隻章魚了！</h3>
-
-<p>你可以：</p>
+<p>Server_2</p>
 
 <ul>
-<li>試試<a href="http://octopress.org/docs/blogging/plugins/">plugins</a></li>
-<li>學學<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>，畢竟章魚先生的文章都是用Markdown語法寫的</li>
-<li>當個安分的部落客好好寫文章</li>
+<li>CentOS 5.6</li>
+<li>ip: 192.168.0.2</li>
 </ul>
 
+
+<p>Virtual ip: 192.168.0.200</p>
+
+<h3>Step 1</h3>
+
+<p>It&#8217;s really easy to install heartbeat on RHEL5 / CentOS.</p>
+
+<pre><code>wget -O /etc/yum.repos.d/clusterlabs.repo http://clusterlabs.org/rpm/epel-5/clusterlabs.repo
+yum install -y heartbeat
+</code></pre>
+
+<p>We&#8217;re going to use httpd for testing, if you don&#8217;t have this…</p>
+
+<pre><code>yum install -y httpd
+</code></pre>
+
+<p>NOTICE: Both serevers require heartbeat and httpd be installed.</p>
+
+<h3>Step 2</h3>
+
+<p>Next, copy configurations. NOTICE: Your heartbeat version might be different.</p>
+
+<pre><code>cp /usr/share/doc/heartbeat-3.0.3/authkeys /etc/ha.d/
+cp /usr/share/doc/heartbeat-3.0.3/ha.cf /etc/ha.d/
+cp /usr/share/doc/heartbeat-3.0.3/haresources /etc/ha.d/
+</code></pre>
+
+<h3>Step 3</h3>
+
+<p>Setting up the authkeys</p>
+
+<pre><code>vim /etc/ha.d/authkeys
+</code></pre>
+
+<p>Type</p>
+
+<pre><code>auth 1 # auth num
+1 md5 dalema # auth num, auth method, auth secret
+</code></pre>
+
+<p>Change privilege</p>
+
+<pre><code>chmod 600 /etc/ha.d/authkeys
+</code></pre>
+
+<h3>Step 4</h3>
+
+<p>Setting up ha.cf</p>
+
+<p>Append the settings on the tail of ha.cf</p>
+
+<pre><code>logfile /var/log/ha.log
+keepalive 2
+deadtime 30
+initdead 120
+bcast eth0
+auto_failback on
+node Server_1 # Server 1's hostname
+node Server_2 # Srever 2's hostname
+ping 192.168.0.25 # it's your gateway ip
+respawn hacluster /usr/lib64/heartbeat/ipfail
+apiauth ipfail gid=haclient uid=hacluster
+</code></pre>
+
+<h3>Step 5</h3>
+
+<p>Setting up the haresources.</p>
+
+<p>Append</p>
+
+<pre><code># point current server's httpd service to the virtual ip
+Server_1 192.168.0.200
+</code></pre>
+
+<h3>Step 6</h3>
+
+<p>Copy settings to Server_2</p>
+
+<pre><code>scp -r /etc/ha.d/ root@192.168.0.2:/etc/
+</code></pre>
+
+<h3>Step 7</h3>
+
+<p>Write some html for testing.</p>
+
+<p>On Server_1</p>
+
+<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
+</code></pre>
+
+<p>On Server_2</p>
+
+<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
+</code></pre>
+
+<h3>Step 8</h3>
+
+<p>Test heartbeat is working or not.</p>
+
+<p>Start the service on both serevers ( It takes 2 mins )</p>
+
+<pre><code>service heartbeat restart
+</code></pre>
+
+<p>or</p>
+
+<pre><code>/etc/init.d/heartbeat start
+</code></pre>
+
+<p>Use browser to connect http://192.168.0.1 and http://192.168.0.200,
+Both should work well. And http://192.168.0.2 should be no response.</p>
+
+<p>Then shutdown Server_1&#8217;s heartbeat</p>
+
+<pre><code>service heartbeat stop
+</code></pre>
+
+<p>Now, http://192.168.0.2 and http://192.168.0.200 should be workable, and http://192.168.0.1 should be no response.</p>
+
+<p>If you restart the heartbeat on Server_1, the Server_2&#8217;s job will be taken over by Server_1.</p>
+
+<pre><code>service heartbeat start
+</code></pre>
+
+<p>Heartbeat will automatically handle your httpd, you don&#8217;t have to worry about that. For the clients outside the cluster, they should connect to the virtual ip.</p>
+
+<h2>Troubleshoot</h2>
+
+<p>The udpport default is 694, make sure you did not block it in your firewall.</p>
+
+<p>And make sure your library in ha.cf has right version, 64-bit is /usr/lib64/&#8230;, 32-bit is /usr/lib/&#8230;</p>
+
+<h2>Resources</h2>
+
+<p>Heartbeat could use with Pacemaker, or use corosync instead of Heartbeat. For more detail, visit</p>
+
+<p><a href="http://www.linux-ha.org/doc/users-guide/users-guide.html">Official Guide</a></p>
 </div>
 
 
@@ -193,12 +288,12 @@ rake install
   
 
 
-<time datetime="2012-03-25T14:05:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>
+    <a class='category' href='/blog/categories/cloud/'>cloud</a>
   
 </span>
 
@@ -207,7 +302,7 @@ rake install
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" >Tweet</a>
   
   
   
@@ -216,8 +311,8 @@ rake install
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2012/04/01/the-new-ipad/" title="Previous Post: 那些 iPad 幫上忙的事">&laquo; 那些 iPad 幫上忙的事</a>
       
-        <a class="basic-alignment right" href="/blog/2012/03/28/articles-to-rails/" title="Next Post: Ruby on Rails - 6 篇文上軌道">Ruby on Rails - 6 篇文上軌道 &raquo;</a>
       
     </p>
   </footer>
