@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby on Rails | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-04-04T00:31:47+08:00</updated>
+  <updated>2012-04-09T08:48:40+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gems 混搭空想]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/04/09/mix-gem/"/>
+    <updated>2012-04-09T08:43:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/04/09/mix-gem</id>
+    <content type="html"><![CDATA[<h2>空想所根據的規則</h2>
+
+<p>Ruby 的 Gems 五花八門，其中不乏很多有特色的 Gems 。常常在想是不是有可能利用這些 Gems 搭出有趣但不一定要實用的服務呢？</p>
+
+<p>大致上， Gems 可以分為 Front-end 和 Back-end 以及 Mixed ，我混搭的第一步就是先搜集一些有趣的Gems，然後再隨機的組合。基本上是從 Front-end 和 Back-end 裡面各抽出一個候選人，接著想想搭在一起會變成什麼玩意。當然，搭出來的可能是狗屁不通的結果，但是，一切都以好玩為出發點。</p>
+
+<h2>Front-end gems</h2>
+
+<p>Front-end 比較偏向內容的呈現，可能是輸出圖形，也可能是輸出文字或是兩者。</p>
+
+<ul>
+<li><a href="https://github.com/imathis/octopress">octopress</a>：知名的部落格架站系統</li>
+<li><a href="https://github.com/schacon/showoff">showoff</a>：web 介面的投影片</li>
+</ul>
+
+
+<h2>Back-end gems</h2>
+
+<p>Back-end 以 processing 為主，比較沒有花俏的輸出。</p>
+
+<ul>
+<li><a href="https://github.com/tenderlove/mechanize">mechanize</a>：爬蟲，抓網頁很強大，可以指定 referer 來抓一些可能會被檔的網頁。</li>
+<li><a href="https://github.com/tenderlove/nokogiri">nokogiri</a>：html / xml 分析器，能透過 xpath 或 css selector 輕鬆取代修改文件。</li>
+<li><a href="https://github.com/cardinalblue/rest-core">rest-core</a>：和社群網站 api 串接的工具。</li>
+</ul>
+
+
+<h2>開始做夢</h2>
+
+<h3>octomachine</h3>
+
+<p>第一組上場的候選人是 octopress / mechanize ，他們的結晶是 octomachine ！女士們，先生們，你可曾偷別人的文章發表過？有了 octomachine 你不需要辛苦的手動盜文了！ 它會自動定時地去您指定的網站檢查是否有更新，再自動偷文轉貼到您的 octopress 部落格上！</p>
+
+<h3>octogiri</h3>
+
+<p>第二組，octopress / nokogiri ，合稱 octogiri 。可以幫助你分析你的部落格文章用了多少字，多少 html 標籤等等。</p>
+
+<h3>octorest</h3>
+
+<p>第三組 octopress / rest-core 的 octorest 則是讓你的部落格文章可以一鍵發送到各個社群媒體（ Facebook, Twitter, plurk … oh, and google+ ）</p>
+
+<h3>showmachine</h3>
+
+<p>第四組由 showoff / mechanize 組成的 showmachine 是一個即時將指定的部落格轉成投影片的工具，讓您可以隨時介紹自己的部落格(？)</p>
+
+<h3>showgirl</h3>
+
+<p>  第五組， showoff / octogiri 帶來了 showgirl (我沒拼錯，比較喜歡這樣叫～) ，網頁分析報表軟體。以投影片的方式報告網頁有哪些壞連結，有哪些不符合規範的標籤。</p>
+
+<h3>show-rest</h3>
+
+<p>  最後一組， showoff / rest-core ， show-rest ！這可厲害了，可以把你所有的社群訊息轉成投影片，你不需要一一瀏覽不同網站，只要連到你的投影片網址，最新的動態就一張一張地呈現給你看！如果你是宅到爆表的魔人，你絕對要試試這個！</p>
+
+<h2>More?</h2>
+
+<p>  Front-end 和 Back-end gems 未必要各取其一，也可以都是 Front-end 或都是 Back-end，甚至更多。偶爾來些 gems 的腦力激盪，也是蠻不錯的遊戲。說不定，你的下一個產品就是從這種激盪中生出來的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails - 6 篇文上軌道]]></title>
