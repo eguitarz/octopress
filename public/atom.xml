@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-04-18T22:03:55+08:00</updated>
+  <updated>2012-04-29T17:19:44+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Image injection 輕鬆檢查身份認證]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/04/29/image-injection/"/>
+    <updated>2012-04-29T17:18:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/04/29/image-injection</id>
+    <content type="html"><![CDATA[<h2>難道想吃飯一定要學會種稻？</h2>
+
+<p>最近在做網站外認證的事情，也就是在別人的網頁上要認出使用者的身份，除了拿刀子要別人把原始碼拿來讓我加認證程式碼外，還有更好的選擇。無論如何勢必要連回自己的網站做認證，你可以洋洋灑灑的寫個 Ajax 認證機制，甚至還實作了 OAuth 2.0 。喔，不，我是懶惰工程師，費工的事我可不愛幹。</p>
+
+<p>我的目標只是要在別人的網站背後開一個通道，這個通道可以讓我知道使用者是否已經登入我的網站，並且使用者可以利用這個通道向我發送指令。</p>
+
+<p>有個妙招可以做到上述這件事，透過使用者點擊 bookmark 注入 javascript 和圖片到他正在瀏覽的網頁即可。</p>
+
+<h2>圖片，你傳遞資訊的好朋友</h2>
+
+<p>瀏覽器對圖片的限制很寬鬆，當讀取網頁時，也同時在做非同步的圖片讀取。這些圖片可以來自其它網站，而其它網站接到請求時可以根據使用者是否擁有 session 決定要回傳什麼圖片。（這不就很巧妙的做到 ajax 認證會做的事了？）</p>
+
+<p>當目標網頁接收到圖片時，我們可以注入 javascript 讀取圖片的類型而知道使用者是否已經擁有自身網站的 session。</p>
+
+<p>整個過程圖片是就像來源網站的代理人，使用者向來源網站請求圖片，來源網站將資訊透過圖片表達。最簡單的方式可以依據使用者是否登入，回傳寬度為 1 或 2 的空白圖片。</p>
+
+<h2>怎麼做？</h2>
+
+<h3>製作一個可以注入 javascript 的書籤。</h3>
+
+<pre><code>javascript:(function(){MY_SCRIPT=document.createElement('SCRIPT');MY_SCRIPT.type='text/javascript';MY_SCRIPT.src='http://127.0.0.1:3000/test.js';document.body.appendChild(MY_SCRIPT)})();
+
+`my_script.js`是用來 inject 圖片和讀取圖片寬度的 javascript 。
+</code></pre>
+
+<h3>製作 my_script.js</h3>
+
+<pre><code>document.body.innerHTML += '\&lt;innerHTMLmg id="MY_IMG" src="path/to/my/image" style="display:none;"&gt;';
+
+現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。
+</code></pre>
+
+<h3>加入圖片讀取機制</h3>
+
+<pre><code>在 my_script.js 加上
+
+read_img = function() {
+  while (!document.getElementById("MY_IMG")) {}
+          var w = document.getElementById("MY_IMG").width;
+
+          if (w &gt; 0) {
+            if          (w == 1) {
+              alert("User has logged in. width = " + w );
+            } else {
+                            alert("Please login, width = " + w);
+            }
+          }
+}
+</code></pre>
+
+<p>read_img();</p>
+
+<p>將圖片的路徑設定好後，可以在任意的網頁點選書籤，會有一個對話框檢查注入的圖片寬度，程式碼裡 width = 1 代表已經登入，其他則尚未登入。</p>
+
+<p>至於動態產生圖片的部分，可以參考 <a href="http://www.google.com.tw/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0CC4QFjAA&amp;url=http%3A%2F%2Fwww.w3.org%2FGraphics%2FGIF%2Fspec-gif89a.txt&amp;ei=XgadT_S6CqXnmAWPm5TODg&amp;usg=AFQjCNGkPzr6fu-V-T05Uzu6aCxGaZ_iRA&amp;sig2=BNcPCLS_4sFTBpJiAQ8eIg">GIF spec</a> 自己生一個假的 gif 圖片。</p>
+
+<p>要傳送指令的話，也只需在請求圖片時加上 get 參數即可。（例如： &lt;img src=&#8221;MY_IMG&#8221; src=&#8221;path/to/my/image/image.gif?cmd=123&#8221;）</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[文字萃取機]]></title>
