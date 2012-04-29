@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-04-29T17:19:44+08:00</updated>
+  <updated>2012-04-29T17:22:00+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -66,9 +66,8 @@ read_img = function() {
             }
           }
 }
+read_img();
 </code></pre>
-
-<p>read_img();</p>
 
 <p>將圖片的路徑設定好後，可以在任意的網頁點選書籤，會有一個對話框檢查注入的圖片寬度，程式碼裡 width = 1 代表已經登入，其他則尚未登入。</p>
 
