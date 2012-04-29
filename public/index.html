@@ -128,16 +128,16 @@
 <h3>製作一個可以注入 javascript 的書籤。</h3>
 
 <pre><code>javascript:(function(){MY_SCRIPT=document.createElement('SCRIPT');MY_SCRIPT.type='text/javascript';MY_SCRIPT.src='http://127.0.0.1:3000/test.js';document.body.appendChild(MY_SCRIPT)})();
-
-`my_script.js`是用來 inject 圖片和讀取圖片寬度的 javascript 。
 </code></pre>
+
+<p><code>my_script.js</code>是用來 inject 圖片和讀取圖片寬度的 javascript 。</p>
 
 <h3>製作 my_script.js</h3>
 
 <pre><code>document.body.innerHTML += '\&lt;innerHTMLmg id="MY_IMG" src="path/to/my/image" style="display:none;"&gt;';
-
-現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。
 </code></pre>
+
+<p>現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。</p>
 
 <h3>加入圖片讀取機制</h3>
 

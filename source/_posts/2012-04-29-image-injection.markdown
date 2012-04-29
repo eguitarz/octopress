@@ -27,13 +27,13 @@ categories: javascript
 
     javascript:(function(){MY_SCRIPT=document.createElement('SCRIPT');MY_SCRIPT.type='text/javascript';MY_SCRIPT.src='http://127.0.0.1:3000/test.js';document.body.appendChild(MY_SCRIPT)})();
 
-    `my_script.js`是用來 inject 圖片和讀取圖片寬度的 javascript 。
+`my_script.js`是用來 inject 圖片和讀取圖片寬度的 javascript 。
 
 ###製作 my_script.js
 
 	document.body.innerHTML += '\<innerHTMLmg id="MY_IMG" src="path/to/my/image" style="display:none;">';
 
-	現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。
+現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。
 
 ###加入圖片讀取機制
 
