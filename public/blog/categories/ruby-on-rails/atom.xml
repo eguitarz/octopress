@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby on Rails | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-05-10T00:12:28+08:00</updated>
+  <updated>2012-06-12T17:46:30+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/"/>
+    <updated>2012-06-12T17:39:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/06/12/rails-mail</id>
+    <content type="html"><![CDATA[<p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
+
+<h2>前置作業</h2>
+
+<ul>
+<li>一個 gmail 帳號</li>
+</ul>
+
+
+<h2>步驟</h2>
+
+<h3>撰寫設定檔</h3>
+
+<p>在 YOUR_PROJECT/config/initializers 下建立 setup_mail.rb 的文件。</p>
+
+<p>setup_mail.rb</p>
+
+<pre><code>ActionMailer::Base.smtp_settings = {
+  :address              =&gt; "smtp.gmail.com",
+  :port                 =&gt; 587,
+  :domain               =&gt; "YOURDOMAIN.com",
+  :user_name            =&gt; "YOUR_GMAIL_ACC",
+  :password             =&gt; "YOUR_GMAIL_PWD",
+  :authentication       =&gt; "plain",
+  :enable_starttls_auto =&gt; true
+}
+</code></pre>
+
+<h3>建立 mailer</h3>
+
+<pre><code>rails g mailer my_mailer
+</code></pre>
+
+<p>將會在你的 app/mailers 下建立一個 my_mailer.rb。</p>
+
+<p>my_mailer.rb初始會長這樣</p>
+
+<pre><code>class MyMailer &lt; ActionMailer::Base
+  default :from =&gt; "from@example.com"
+end
+</code></pre>
+
+<p>改成</p>
+
+<pre><code>class MyMailer &lt; ActionMailer::Base
+  def send_mail
+    mail(:to =&gt; "YOUR_CLIENT@gmail.com", :subject =&gt; "Bonjour", :from =&gt; "YOUR_GMAIL@gmail.com")
+  end
+end
+</code></pre>
+
+<h3>撰寫郵件內容</h3>
+
+<p>/app/views/my_mailer 下新增 send_mail.text.erb</p>
+
+<p>send_mail.text.erb</p>
+
+<pre><code>Hello world!
+</code></pre>
+
+<h3>呼叫寄信函式</h3>
+
+<p>你已經設定完所有要寄信的部分了，接著在要寄信的 Controller 裡 call <code>MyMailer.send_mail.deliver</code> 即可</p>
+
+<p>xxx_controller.rb</p>
+
+<pre><code>def welcome
+  MyMailer.send_mail.deliver
+end
+</code></pre>
+
+<h3>進階</h3>
+
+<p>設定好寄信功能在 rails 3 裡很省事，其它進階的功能項增加附件之類的也不困難，可以參考 <a href="http://asciicasts.com/episodes/206-action-mailer-in-rails-3">Ascii casts</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[文字萃取機]]></title>

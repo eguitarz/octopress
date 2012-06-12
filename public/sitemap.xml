@@ -34,7 +34,11 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/blog/2012/05/09/littlesnapper/</loc>
-        <lastmod>2012-05-10T00:12:20+08:00</lastmod>
+        <lastmod>2012-05-10T00:12:54+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/</loc>
+        <lastmod>2012-06-12T17:46:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/about/</loc>
@@ -42,7 +46,7 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/blog/archives/</loc>
-        <lastmod>2012-05-10T00:12:20+08:00</lastmod>
+        <lastmod>2012-06-12T17:46:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/contact/</loc>
@@ -50,6 +54,6 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/</loc>
-        <lastmod>2012-05-10T00:12:20+08:00</lastmod>
+        <lastmod>2012-06-12T17:46:30+08:00</lastmod>
     </url>
 </urlset>
