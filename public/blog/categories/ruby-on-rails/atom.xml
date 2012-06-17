@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby on Rails | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-06-12T17:46:30+08:00</updated>
+  <updated>2012-06-17T16:47:43+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[每日定時寄信 in Rails 3]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler/"/>
+    <updated>2012-06-17T16:43:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler</id>
+    <content type="html"><![CDATA[<p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
+
+<p>於是開始 google "rails scheduler"，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
+
+<p>用了之後發現一切真是該死的簡單，如果你已經有設定好 Mailer，不用 3 分鐘就可以搞定一切！</p>
+
+<h2>步驟</h2>
+
+<h3>安裝 Rufus Scheduler</h3>
+
+<p>設定 Gemfile</p>
+
+<pre><code>gem 'rufus-scheduler'
+</code></pre>
+
+<p>安裝</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h3>設定 initializer</h3>
+
+<p>建立 .../config/initializers/task_scheduler.rb</p>
+
+<pre><code>scheduler = Rufus::Scheduler.start_new
+
+scheduler.every("10s") do
+  UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>設定為每 10 秒寄一次信是為了要可以快速的確認是否 work 。 <code>UserMailer</code>應該換成自己的 Mailer 。</p>
+
+<p>接著可以改成每天固定時間寄信，這裡設定為每天早上 6 點。</p>
+
+<pre><code>scheduler.cron("0 6 * * *") do
+   UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>
@@ -288,80 +337,6 @@ puts juice.content
 
 <p><a href="https://github.com/imathis/octopress">octopress</a>
 有趣的部落格軟體，不需要用資料庫，而是用git來控制文章，十分適合hacker的玩具。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress - 章魚先生，你好]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress/"/>
-    <updated>2012-03-25T14:05:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress</id>
-    <content type="html"><![CDATA[<p>被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的"Octopress"。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。</p>
-
-<p><a href="http://octopress.org"><img class="right" src="http://octopress.org/images/logo.png"></a></p>
-
-<p>在開始之前，需要準備以下工具：</p>
-
-<ul>
-<li>Github帳號 (包含git工具，請參考<a href="http://help.github.com/mac-set-up-git/">這裡</a>)</li>
-<li>RVM (可以擁有多重Ruby版本的套件，安裝方式可以<a href="http://octopress.org/docs/setup/rvm/">看這</a>)</li>
-<li>Ruby 1.9.2 (比較舊版的Ruby，請透過RVM安裝)</li>
-<li>(optional) Heroku帳號，用來發佈你的web，也可以發佈到Github。</li>
-<li>充滿好奇心的小腦袋</li>
-</ul>
-
-
-<h3>Step 1. Install Ruby</h3>
-
-<pre><code>rvm install 1.9.2
-# 下面無法安裝的解法比較花時間，快速的話可以直接下rvm install 1.9.2 --with-gcc=clang
-rvm use 1.9.2
-</code></pre>
-
-<p>如果是Mac可能會遇到gcc是LLVM裝不上的問題，可以看這篇<a href="http://blog.yorkxin.org/2012/03/09/ruby-192-with-xcode-43/">解法</a>或你覺得時間很寶貴，可以直接下</p>
-
-<pre><code>rvm install 1.9.2 --with-gcc=clang
-</code></pre>
-
-<h3>Step 2. Checkout</h3>
-
-<pre><code>cd /PATH/TO/YOUR/DIRECTORY
-git clone git://github.com/imathis/octopress.git # 建議可以先將Octopress Fork到自己的帳戶下再Clone，將來如果想修改核心比較方便
-</code></pre>
-
-<h3>Step 3. Install Octopress</h3>
-
-<pre><code>cd octopress
-bundle install
-rake install
-</code></pre>
-
-<h3>Step 4. Configure</h3>
-
-<p>剛開始只需要修改_config.yml即可，可參考<a href="http://octopress.org/docs/configuring/">官網config教學</a></p>
-
-<h3>Step 5. Post</h3>
-
-<pre><code>rake new_post[YOUR_POST_NAME]
-</code></pre>
-
-<h3>Step 6. Preview</h3>
-
-<pre><code>rake preview
-</code></pre>
-
-<p>然後你就可以看到章魚先生在你的電腦上呈現出你的部落格了！接著你可以發佈到Heroku去，詳細步驟可以參考<a href="http://blog.eddie.com.tw/2011/10/11/how-to-install-octopress-on-heroku/">這裡</a></p>
-
-<h3>完成以上步驟，就可以開始拆解這隻章魚了！</h3>
-
-<p>你可以：</p>
-
-<ul>
-<li>試試<a href="http://octopress.org/docs/blogging/plugins/">plugins</a></li>
-<li>學學<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>，畢竟章魚先生的文章都是用Markdown語法寫的</li>
-<li>當個安分的部落客好好寫文章</li>
-</ul>
-
 ]]></content>
   </entry>
   

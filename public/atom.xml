@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-06-12T17:46:30+08:00</updated>
+  <updated>2012-06-17T16:47:43+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[每日定時寄信 in Rails 3]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler/"/>
+    <updated>2012-06-17T16:43:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler</id>
+    <content type="html"><![CDATA[<p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
+
+<p>於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
+
+<p>用了之後發現一切真是該死的簡單，如果你已經有設定好 Mailer，不用 3 分鐘就可以搞定一切！</p>
+
+<h2>步驟</h2>
+
+<h3>安裝 Rufus Scheduler</h3>
+
+<p>設定 Gemfile</p>
+
+<pre><code>gem 'rufus-scheduler'
+</code></pre>
+
+<p>安裝</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h3>設定 initializer</h3>
+
+<p>建立 &#8230;/config/initializers/task_scheduler.rb</p>
+
+<pre><code>scheduler = Rufus::Scheduler.start_new
+
+scheduler.every("10s") do
+  UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>設定為每 10 秒寄一次信是為了要可以快速的確認是否 work 。 <code>UserMailer</code>應該換成自己的 Mailer 。</p>
+
+<p>接著可以改成每天固定時間寄信，這裡設定為每天早上 6 點。</p>
+
+<pre><code>scheduler.cron("0 6 * * *") do
+   UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>

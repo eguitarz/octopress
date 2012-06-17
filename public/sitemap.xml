@@ -41,12 +41,16 @@
         <lastmod>2012-06-12T17:46:30+08:00</lastmod>
     </url>
     <url>
+        <loc>http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler/</loc>
+        <lastmod>2012-06-17T16:47:43+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://dale-ma.heroku.com/about/</loc>
         <lastmod>2012-03-25T17:59:43+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/blog/archives/</loc>
-        <lastmod>2012-06-12T17:46:30+08:00</lastmod>
+        <lastmod>2012-06-17T16:47:43+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/contact/</loc>
@@ -54,6 +58,6 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/</loc>
-        <lastmod>2012-06-12T17:46:30+08:00</lastmod>
+        <lastmod>2012-06-17T16:47:43+08:00</lastmod>
     </url>
 </urlset>
