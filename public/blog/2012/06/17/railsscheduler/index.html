@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>每日定時寄信 in Rails 3 - Dale Ma</title>
+  <meta name="author" content="Dale Ma">
+
+  
+  <meta name="description" content="先前研究了如何在 rails 3 裡寄 e-mail，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。 於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - Rufus Scheduler。我不需要有 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dale Ma" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30309389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dale Ma</a></h1>
+  
+    <h2>Simple But Not Too Simple</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dale-ma.heroku.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">每日定時寄信 in Rails 3</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-17T16:43:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
+
+<p>於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
+
+<p>用了之後發現一切真是該死的簡單，如果你已經有設定好 Mailer，不用 3 分鐘就可以搞定一切！</p>
+
+<h2>步驟</h2>
+
+<h3>安裝 Rufus Scheduler</h3>
+
+<p>設定 Gemfile</p>
+
+<pre><code>gem 'rufus-scheduler'
+</code></pre>
+
+<p>安裝</p>
+
+<pre><code>bundle install
+</code></pre>
+
+<h3>設定 initializer</h3>
+
+<p>建立 &#8230;/config/initializers/task_scheduler.rb</p>
+
+<pre><code>scheduler = Rufus::Scheduler.start_new
+
+scheduler.every("10s") do
+  UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>設定為每 10 秒寄一次信是為了要可以快速的確認是否 work 。 <code>UserMailer</code>應該換成自己的 Mailer 。</p>
+
+<p>接著可以改成每天固定時間寄信，這裡設定為每天早上 6 點。</p>
+
+<pre><code>scheduler.cron("0 6 * * *") do
+   UserMailer.convert_result.deliver
+end
+</code></pre>
+
+<p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dale Ma</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-17T16:43:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/12/railsmail/" title="Previous Post: Rails 3 如何寄 gmail">&laquo; Rails 3 如何寄 gmail</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/22/travelhacking/" title="Next Post: 邊旅行邊 hacking">邊旅行邊 hacking &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/22/travelhacking/">邊旅行邊 hacking</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/17/railsscheduler/">每日定時寄信 in Rails 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/12/railsmail/">Rails 3 如何寄 gmail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/09/littlesnapper/">截圖、註解，LittleSnapper</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/29/image-injection/">Image injection 輕鬆檢查身份認證</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/18/text-extract/">文字萃取機</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/09/mix-gem/">Gems 混搭空想</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/04/heartbeat/">Heartbeat Install Guide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/01/the-new-ipad/">那些 iPad 幫上忙的事</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/30/github-network/">GitHub - Network圖表學</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/eguitarz">@eguitarz</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'eguitarz',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("eguitarz", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/eguitarz" class="twitter-follow-button" data-show-count="false">Follow @eguitarz</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Dale Ma -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
