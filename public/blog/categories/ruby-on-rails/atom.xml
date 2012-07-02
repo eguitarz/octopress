@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby on Rails | Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-06-17T17:07:46+08:00</updated>
+  <updated>2012-06-29T06:19:50+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[每日定時寄信 in Rails 3]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler/"/>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/"/>
     <updated>2012-06-17T16:43:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler</id>
+    <id>http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler</id>
     <content type="html"><![CDATA[<p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
 
 <p>於是開始 google "rails scheduler"，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
@@ -64,9 +64,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/"/>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/12/railsmail/"/>
     <updated>2012-06-12T17:39:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/12/rails-mail</id>
+    <id>http://dale-ma.heroku.com/blog/2012/06/12/railsmail</id>
     <content type="html"><![CDATA[<p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
 
 <h2>前置作業</h2>

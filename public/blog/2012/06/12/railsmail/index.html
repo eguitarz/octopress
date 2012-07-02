@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Heartbeat Install Guide - Dale Ma</title>
+  <title>Rails 3 如何寄 gmail - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="What - The use of Heartbeat Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and &hellip;">
+  <meta name="description" content="設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。 前置作業 一個 gmail 帳號 步驟 撰寫設定檔 在 YOUR_PROJECT/config/initializers 下建立 setup_mail.rb 的文件。 setup_mail. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/06/12/railsmail">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Heartbeat Install Guide</h1>
+      <h1 class="entry-title">Rails 3 如何寄 Gmail</h1>
     
     
       <p class="meta">
@@ -97,175 +97,87 @@
   
 
 
-<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+<time datetime="2012-06-12T17:39:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>What - The use of Heartbeat</h2>
+<div class="entry-content"><p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
 
-<p>Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and once if it had been shutdown accidently, then the service will stop. There&#8217;s a workaround for this situation, prepare Server_2 and duplicate the service settings on it. Install Heartbeat on both of them. When Heartbeat starts working on both servers, it provides a virtual ip. If any one of servers stop working, the other one will takeover the job.</p>
-
-<p>The clients are linking to the virtual ip, they don&#8217;t know the server has been shutdown. Heartbeat guarantees the service will keep serving clients when any one of its server is alive.</p>
-
-<h2>How - Install Heartbeat</h2>
-
-<h3>Environment</h3>
-
-<p>Server_1</p>
+<h2>前置作業</h2>
 
 <ul>
-<li>CentOS 5.6</li>
-<li>ip: 192.168.0.1</li>
+<li>一個 gmail 帳號</li>
 </ul>
 
 
-<p>Server_2</p>
+<h2>步驟</h2>
 
-<ul>
-<li>CentOS 5.6</li>
-<li>ip: 192.168.0.2</li>
-</ul>
+<h3>撰寫設定檔</h3>
 
+<p>在 YOUR_PROJECT/config/initializers 下建立 setup_mail.rb 的文件。</p>
 
-<p>Virtual ip: 192.168.0.200</p>
+<p>setup_mail.rb</p>
 
-<h3>Step 1</h3>
-
-<p>It&#8217;s really easy to install heartbeat on RHEL5 / CentOS.</p>
-
-<pre><code>wget -O /etc/yum.repos.d/clusterlabs.repo http://clusterlabs.org/rpm/epel-5/clusterlabs.repo
-yum install -y heartbeat
+<pre><code>ActionMailer::Base.smtp_settings = {
+  :address              =&gt; "smtp.gmail.com",
+  :port                 =&gt; 587,
+  :domain               =&gt; "YOURDOMAIN.com",
+  :user_name            =&gt; "YOUR_GMAIL_ACC",
+  :password             =&gt; "YOUR_GMAIL_PWD",
+  :authentication       =&gt; "plain",
+  :enable_starttls_auto =&gt; true
+}
 </code></pre>
 
-<p>We&#8217;re going to use httpd for testing, if you don&#8217;t have this…</p>
+<h3>建立 mailer</h3>
 
-<pre><code>yum install -y httpd
+<pre><code>rails g mailer my_mailer
 </code></pre>
 
-<p>NOTICE: Both serevers require heartbeat and httpd be installed.</p>
+<p>將會在你的 app/mailers 下建立一個 my_mailer.rb。</p>
 
-<h3>Step 2</h3>
+<p>my_mailer.rb初始會長這樣</p>
 
-<p>Next, copy configurations. NOTICE: Your heartbeat version might be different.</p>
-
-<pre><code>cp /usr/share/doc/heartbeat-3.0.3/authkeys /etc/ha.d/
-cp /usr/share/doc/heartbeat-3.0.3/ha.cf /etc/ha.d/
-cp /usr/share/doc/heartbeat-3.0.3/haresources /etc/ha.d/
+<pre><code>class MyMailer &lt; ActionMailer::Base
+  default :from =&gt; "from@example.com"
+end
 </code></pre>
 
-<h3>Step 3</h3>
+<p>改成</p>
 
-<p>Setting up the authkeys</p>
-
-<pre><code>vim /etc/ha.d/authkeys
+<pre><code>class MyMailer &lt; ActionMailer::Base
+  def send_mail
+    mail(:to =&gt; "YOUR_CLIENT@gmail.com", :subject =&gt; "Bonjour", :from =&gt; "YOUR_GMAIL@gmail.com")
+  end
+end
 </code></pre>
 
-<p>Type</p>
+<h3>撰寫郵件內容</h3>
 
-<pre><code>auth 1 # auth num
-1 md5 dalema # auth num, auth method, auth secret
+<p>/app/views/my_mailer 下新增 send_mail.text.erb</p>
+
+<p>send_mail.text.erb</p>
+
+<pre><code>Hello world!
 </code></pre>
 
-<p>Change privilege</p>
+<h3>呼叫寄信函式</h3>
 
-<pre><code>chmod 600 /etc/ha.d/authkeys
+<p>你已經設定完所有要寄信的部分了，接著在要寄信的 Controller 裡 call <code>MyMailer.send_mail.deliver</code> 即可</p>
+
+<p>xxx_controller.rb</p>
+
+<pre><code>def welcome
+  MyMailer.send_mail.deliver
+end
 </code></pre>
 
-<h3>Step 4</h3>
+<h3>進階</h3>
 
-<p>Setting up ha.cf</p>
-
-<p>Append the settings on the tail of ha.cf</p>
-
-<pre><code>logfile /var/log/ha.log
-keepalive 2
-deadtime 30
-initdead 120
-bcast eth0
-auto_failback on
-node Server_1 # Server 1's hostname
-node Server_2 # Srever 2's hostname
-ping 192.168.0.25 # it's your gateway ip
-respawn hacluster /usr/lib64/heartbeat/ipfail
-apiauth ipfail gid=haclient uid=hacluster
-</code></pre>
-
-<h3>Step 5</h3>
-
-<p>Setting up the haresources.</p>
-
-<p>Append</p>
-
-<pre><code># point current server's httpd service to the virtual ip
-Server_1 192.168.0.200
-</code></pre>
-
-<h3>Step 6</h3>
-
-<p>Copy settings to Server_2</p>
-
-<pre><code>scp -r /etc/ha.d/ root@192.168.0.2:/etc/
-</code></pre>
-
-<h3>Step 7</h3>
-
-<p>Write some html for testing.</p>
-
-<p>On Server_1</p>
-
-<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
-</code></pre>
-
-<p>On Server_2</p>
-
-<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
-</code></pre>
-
-<h3>Step 8</h3>
-
-<p>Test heartbeat is working or not.</p>
-
-<p>Start the service on both serevers ( It takes 2 mins )</p>
-
-<pre><code>service heartbeat restart
-</code></pre>
-
-<p>or</p>
-
-<pre><code>/etc/init.d/heartbeat start
-</code></pre>
-
-<p>Use browser to connect http://192.168.0.1 and http://192.168.0.200,
-Both should work well. And http://192.168.0.2 should be no response.</p>
-
-<p>Then shutdown Server_1&#8217;s heartbeat</p>
-
-<pre><code>service heartbeat stop
-</code></pre>
-
-<p>Now, http://192.168.0.2 and http://192.168.0.200 should be workable, and http://192.168.0.1 should be no response.</p>
-
-<p>If you restart the heartbeat on Server_1, the Server_2&#8217;s job will be taken over by Server_1.</p>
-
-<pre><code>service heartbeat start
-</code></pre>
-
-<p>Heartbeat will automatically handle your httpd, you don&#8217;t have to worry about that. For the clients outside the cluster, they should connect to the virtual ip.</p>
-
-<h2>Troubleshoot</h2>
-
-<p>The udpport default is 694, make sure you did not block it in your firewall.</p>
-
-<p>And make sure your library in ha.cf has right version, 64-bit is /usr/lib64/&#8230;, 32-bit is /usr/lib/&#8230;</p>
-
-<h2>Resources</h2>
-
-<p>Heartbeat could use with Pacemaker, or use corosync instead of Heartbeat. For more detail, visit</p>
-
-<p><a href="http://www.linux-ha.org/doc/users-guide/users-guide.html">Official Guide</a></p>
+<p>設定好寄信功能在 rails 3 裡很省事，其它進階的功能項增加附件之類的也不困難，可以參考 <a href="http://asciicasts.com/episodes/206-action-mailer-in-rails-3">Ascii casts</a></p>
 </div>
 
 
@@ -288,12 +200,12 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
   
 
 
-<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+<time datetime="2012-06-12T17:39:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cloud/'>cloud</a>
+    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>
   
 </span>
 
@@ -302,7 +214,7 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/06/12/railsmail/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/06/12/railsmail/" >Tweet</a>
   
   
   
@@ -311,10 +223,10 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/01/the-new-ipad/" title="Previous Post: 那些 iPad 幫上忙的事">&laquo; 那些 iPad 幫上忙的事</a>
+        <a class="basic-alignment left" href="/blog/2012/05/09/littlesnapper/" title="Previous Post: 截圖、註解，LittleSnapper">&laquo; 截圖、註解，LittleSnapper</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/04/09/mix-gem/" title="Next Post: Gems 混搭空想">Gems 混搭空想 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/06/17/railsscheduler/" title="Next Post: 每日定時寄信 in Rails 3">每日定時寄信 in Rails 3 &raquo;</a>
       
     </p>
   </footer>

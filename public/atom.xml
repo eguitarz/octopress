@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-06-17T17:07:46+08:00</updated>
+  <updated>2012-06-29T06:19:50+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -14,10 +14,27 @@
 
   
   <entry>
+    <title type="html"><![CDATA[邊旅行邊 hacking]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/22/travelhacking/"/>
+    <updated>2012-06-22T21:38:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/06/22/travelhacking</id>
+    <content type="html"><![CDATA[<p>這篇文章是在等待轉機時打的，在這之前我從台北飛到上海住了一夜，又從上海飛到溫哥華，現在只剩意志力能讓雙手在鍵盤上敲打，如果把手停下一分鐘大概就會就此昏睡過去。</p>
+
+<p>不論是工作還是自我學習，我不喜歡在資源太充足的情況下做事。如果有某種程度上的限制，我認為能讓自己更珍惜眼前的資源，進而好好善用他們。聽起來有點自虐，但這是 hacking 的精髓所在，如果你的辦公桌可以擺下三台桌機加一台筆電，如果你的時間無窮無盡，就像拿了遙控器對現實按了暫停一樣，把你想做完的事都做完以後再解除暫停，難道這樣效率就會比較高？不，你會因為過度安逸，而疏於你本來想做的事。（想想你六日碰的程式碼比較多還是平日上班時？）</p>
+
+<p>趁我有15天內飛半個地球的行程，打算在15天內利用空閑時間學習和 coding 。當然，會有大部分時間都在交通工具上渡過，同時網路功能將會受到限制。聽起來很糟，但我發現這段時間我效率超好。</p>
+
+<p>我在上飛機前會先把一些網頁資料開在瀏覽器裡，上飛機的時候有空就會拿出來看。等着過海關的時候，我會盤算我的程式流程要怎麼走，資料庫裡要放些什麼表格。飛機上遇到氣流不穩，我仍然拿著筆電寫著程式，反正我哪也不能去（我的筆電有換上SSD，所以不擔心被機身震動影響）。</p>
+
+<p>目前為止，我蠻滿意這段旅程的工作產出和學習成效。接下來要飛到歐洲搭遊輪，我不打算在遊輪上買貴死人的網路，所以接下來會準備個 7 天份的閱讀資料，上去找時間研讀。在閱讀的你，如果這假日有空，不妨去個沒有網路的咖啡廳，來場“資源受限”的 coding 下午茶試試。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[每日定時寄信 in Rails 3]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler/"/>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/"/>
     <updated>2012-06-17T16:43:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/17/rails-scheduler</id>
+    <id>http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler</id>
     <content type="html"><![CDATA[<p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
 
 <p>於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
@@ -64,9 +81,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/"/>
+    <link href="http://dale-ma.heroku.com/blog/2012/06/12/railsmail/"/>
     <updated>2012-06-12T17:39:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/12/rails-mail</id>
+    <id>http://dale-ma.heroku.com/blog/2012/06/12/railsmail</id>
     <content type="html"><![CDATA[<p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
 
 <h2>前置作業</h2>

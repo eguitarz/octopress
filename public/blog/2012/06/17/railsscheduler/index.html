@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Heartbeat Install Guide - Dale Ma</title>
+  <title>每日定時寄信 in Rails 3 - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="What - The use of Heartbeat Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and &hellip;">
+  <meta name="description" content="先前研究了如何在 rails 3 裡寄 e-mail，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。 於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - Rufus Scheduler。我不需要有 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Heartbeat Install Guide</h1>
+      <h1 class="entry-title">每日定時寄信 in Rails 3</h1>
     
     
       <p class="meta">
@@ -97,175 +97,54 @@
   
 
 
-<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+<time datetime="2012-06-17T16:43:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>What - The use of Heartbeat</h2>
+<div class="entry-content"><p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
 
-<p>Heartbeat is a High-Availability ( HA ) system which keep service alive. For example, Server_1 has a httpd service, and once if it had been shutdown accidently, then the service will stop. There&#8217;s a workaround for this situation, prepare Server_2 and duplicate the service settings on it. Install Heartbeat on both of them. When Heartbeat starts working on both servers, it provides a virtual ip. If any one of servers stop working, the other one will takeover the job.</p>
+<p>於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
 
-<p>The clients are linking to the virtual ip, they don&#8217;t know the server has been shutdown. Heartbeat guarantees the service will keep serving clients when any one of its server is alive.</p>
+<p>用了之後發現一切真是該死的簡單，如果你已經有設定好 Mailer，不用 3 分鐘就可以搞定一切！</p>
 
-<h2>How - Install Heartbeat</h2>
+<h2>步驟</h2>
 
-<h3>Environment</h3>
+<h3>安裝 Rufus Scheduler</h3>
 
-<p>Server_1</p>
+<p>設定 Gemfile</p>
 
-<ul>
-<li>CentOS 5.6</li>
-<li>ip: 192.168.0.1</li>
-</ul>
-
-
-<p>Server_2</p>
-
-<ul>
-<li>CentOS 5.6</li>
-<li>ip: 192.168.0.2</li>
-</ul>
-
-
-<p>Virtual ip: 192.168.0.200</p>
-
-<h3>Step 1</h3>
-
-<p>It&#8217;s really easy to install heartbeat on RHEL5 / CentOS.</p>
-
-<pre><code>wget -O /etc/yum.repos.d/clusterlabs.repo http://clusterlabs.org/rpm/epel-5/clusterlabs.repo
-yum install -y heartbeat
+<pre><code>gem 'rufus-scheduler'
 </code></pre>
 
-<p>We&#8217;re going to use httpd for testing, if you don&#8217;t have this…</p>
+<p>安裝</p>
 
-<pre><code>yum install -y httpd
+<pre><code>bundle install
 </code></pre>
 
-<p>NOTICE: Both serevers require heartbeat and httpd be installed.</p>
+<h3>設定 initializer</h3>
 
-<h3>Step 2</h3>
+<p>建立 &#8230;/config/initializers/task_scheduler.rb</p>
 
-<p>Next, copy configurations. NOTICE: Your heartbeat version might be different.</p>
+<pre><code>scheduler = Rufus::Scheduler.start_new
 
-<pre><code>cp /usr/share/doc/heartbeat-3.0.3/authkeys /etc/ha.d/
-cp /usr/share/doc/heartbeat-3.0.3/ha.cf /etc/ha.d/
-cp /usr/share/doc/heartbeat-3.0.3/haresources /etc/ha.d/
+scheduler.every("10s") do
+  UserMailer.convert_result.deliver
+end
 </code></pre>
 
-<h3>Step 3</h3>
+<p>設定為每 10 秒寄一次信是為了要可以快速的確認是否 work 。 <code>UserMailer</code>應該換成自己的 Mailer 。</p>
 
-<p>Setting up the authkeys</p>
+<p>接著可以改成每天固定時間寄信，這裡設定為每天早上 6 點。</p>
 
-<pre><code>vim /etc/ha.d/authkeys
+<pre><code>scheduler.cron("0 6 * * *") do
+   UserMailer.convert_result.deliver
+end
 </code></pre>
 
-<p>Type</p>
-
-<pre><code>auth 1 # auth num
-1 md5 dalema # auth num, auth method, auth secret
-</code></pre>
-
-<p>Change privilege</p>
-
-<pre><code>chmod 600 /etc/ha.d/authkeys
-</code></pre>
-
-<h3>Step 4</h3>
-
-<p>Setting up ha.cf</p>
-
-<p>Append the settings on the tail of ha.cf</p>
-
-<pre><code>logfile /var/log/ha.log
-keepalive 2
-deadtime 30
-initdead 120
-bcast eth0
-auto_failback on
-node Server_1 # Server 1's hostname
-node Server_2 # Srever 2's hostname
-ping 192.168.0.25 # it's your gateway ip
-respawn hacluster /usr/lib64/heartbeat/ipfail
-apiauth ipfail gid=haclient uid=hacluster
-</code></pre>
-
-<h3>Step 5</h3>
-
-<p>Setting up the haresources.</p>
-
-<p>Append</p>
-
-<pre><code># point current server's httpd service to the virtual ip
-Server_1 192.168.0.200
-</code></pre>
-
-<h3>Step 6</h3>
-
-<p>Copy settings to Server_2</p>
-
-<pre><code>scp -r /etc/ha.d/ root@192.168.0.2:/etc/
-</code></pre>
-
-<h3>Step 7</h3>
-
-<p>Write some html for testing.</p>
-
-<p>On Server_1</p>
-
-<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
-</code></pre>
-
-<p>On Server_2</p>
-
-<pre><code>echo "It's Server_1, my heart is beating." &gt; /var/www/html/index.html
-</code></pre>
-
-<h3>Step 8</h3>
-
-<p>Test heartbeat is working or not.</p>
-
-<p>Start the service on both serevers ( It takes 2 mins )</p>
-
-<pre><code>service heartbeat restart
-</code></pre>
-
-<p>or</p>
-
-<pre><code>/etc/init.d/heartbeat start
-</code></pre>
-
-<p>Use browser to connect http://192.168.0.1 and http://192.168.0.200,
-Both should work well. And http://192.168.0.2 should be no response.</p>
-
-<p>Then shutdown Server_1&#8217;s heartbeat</p>
-
-<pre><code>service heartbeat stop
-</code></pre>
-
-<p>Now, http://192.168.0.2 and http://192.168.0.200 should be workable, and http://192.168.0.1 should be no response.</p>
-
-<p>If you restart the heartbeat on Server_1, the Server_2&#8217;s job will be taken over by Server_1.</p>
-
-<pre><code>service heartbeat start
-</code></pre>
-
-<p>Heartbeat will automatically handle your httpd, you don&#8217;t have to worry about that. For the clients outside the cluster, they should connect to the virtual ip.</p>
-
-<h2>Troubleshoot</h2>
-
-<p>The udpport default is 694, make sure you did not block it in your firewall.</p>
-
-<p>And make sure your library in ha.cf has right version, 64-bit is /usr/lib64/&#8230;, 32-bit is /usr/lib/&#8230;</p>
-
-<h2>Resources</h2>
-
-<p>Heartbeat could use with Pacemaker, or use corosync instead of Heartbeat. For more detail, visit</p>
-
-<p><a href="http://www.linux-ha.org/doc/users-guide/users-guide.html">Official Guide</a></p>
+<p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
 </div>
 
 
@@ -288,12 +167,12 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
   
 
 
-<time datetime="2012-04-04T00:25:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+<time datetime="2012-06-17T16:43:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cloud/'>cloud</a>
+    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>
   
 </span>
 
@@ -302,7 +181,7 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/04/04/heartbeat/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/" >Tweet</a>
   
   
   
@@ -311,10 +190,10 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/01/the-new-ipad/" title="Previous Post: 那些 iPad 幫上忙的事">&laquo; 那些 iPad 幫上忙的事</a>
+        <a class="basic-alignment left" href="/blog/2012/06/12/railsmail/" title="Previous Post: Rails 3 如何寄 gmail">&laquo; Rails 3 如何寄 gmail</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/04/09/mix-gem/" title="Next Post: Gems 混搭空想">Gems 混搭空想 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/06/22/travelhacking/" title="Next Post: 邊旅行邊 hacking">邊旅行邊 hacking &raquo;</a>
       
     </p>
   </footer>
