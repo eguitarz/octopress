@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-07-02T12:29:00+08:00</updated>
+  <updated>2012-07-04T09:11:21+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[放空後其實更清醒]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/07/04/newlife/"/>
+    <updated>2012-07-04T09:09:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/07/04/newlife</id>
+    <content type="html"><![CDATA[<p>剛剛結束了半個月的旅行，途中對於未來的路有了更深層的思考。旅行途中我看了 jayonsoftware 的部落格，他每天 4 點半起床，一天只花四小時在寫程式上，同時他還冥想，讓自己的思緒更清楚，<a href="http://www.jayonsoftware.com/home/2012/1/9/daily-routine-of-a-4-hour-programmer.html">整篇文章</a> 給了我很大的啓發，讓我決定也要找找適合自己的生活規律。</p>
+
+<p>首先，我決定學習冥想，初步的 google 結果，發現沒想象中那麼難。冥想能讓腦袋放空，產生適合學習的 Alpha 波。先以最舒服的姿勢坐著，眼睛不一定要閉上，然後慢慢深呼吸，腦袋不要想任何事情。一段時間後（約莫15分鐘）會發現你的心沒有那麼煩躁，大腦也更清醒了。每天起床做一次冥想，幾個月後對心靈會有很大的助益，遇到重大的事情也能泰然的處理。</p>
+
+<p>除了冥想，我也決定增加閱讀的時間，週一到週五閱讀大量的技術書籍，周六日則以非技術書籍為主。同時每年要多學習一種程式語言和人類語言。</p>
+
+<p>平常生活規劃改成 5 ~ 6 點起床、冥想、早餐、接收資訊、寫作。到公司後開始寫程式、學習技術。晚上則盡量11點前上床，將隔天要做的事記下。</p>
+
+<p>如果你也正往高效率的生活邁進，歡迎和我分享。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[邊旅行邊 hacking]]></title>
