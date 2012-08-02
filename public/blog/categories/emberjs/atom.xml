@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emberjs | Dale Ma]]></title>
+  <link href="http://dale-ma.heroku.com/blog/categories/emberjs/atom.xml" rel="self"/>
+  <link href="http://dale-ma.heroku.com/"/>
+  <updated>2012-08-02T15:46:58+08:00</updated>
+  <id>http://dale-ma.heroku.com/</id>
+  <author>
+    <name><![CDATA[Dale Ma]]></name>
+    <email><![CDATA[dalema22@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ember.js practice: Github tool]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/08/02/emberjs/"/>
+    <updated>2012-08-02T15:24:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/08/02/emberjs</id>
+    <content type="html"><![CDATA[<h1>Why would I build this tool?</h1>
+
+<p>Simply speaking, I want to practice Ember.js. Many guys practicing their first app by doing th Todo list. But I wanna try something different. So I picked Github as my target.</p>
+
+<h1>Ember.js, what?</h1>
+
+<p>Ember.js is a javascript web framework comes from the open source project <a href="http://sproutcore.com/">SproutCore</a>, which Apple was contributed greatly in.</p>
+
+<p>Ember.js structured in MVC pattern, with a built-in template engine. Comparing to Backbone.js (Another javascript framework), it's simpler to developers. Backbone.js provides flexibility but you need to write codes by yourself in most cases. Ember.js, on the opposite, might not as flex as Backbone.js is, but it contains already-built structures.</p>
+
+<h1>Functions</h1>
+
+<p>The interface will be pretty simple, a search input field, a recent search results, and the repositories of the searched user. You type the user name in the search box and send the request, I return the repositories of the user.</p>
+
+<h1>First things first</h1>
+
+<p>I have to say I did not start it all by myself. First I browse Andy Matthews' <a href="http://www.adobe.com/devnet/html5/articles/flame-on-a-beginners-guide-to-emberjs.html">Flame on! A beginner's guide to Ember.js</a>. It's a simple twitter app built on ember.js. I "borrowed" his code and made some modifications. If you need to learn everything from scraps, his guide is quite a good start point. I will not cover too many basic stuffs here.</p>
+
+<h1>On the way!</h1>
+
+<p>It's easy to create Ember app, only one line to type:</p>
+
+<pre><code>App = Em.Application.create();
+</code></pre>
+
+<h1>Model</h1>
+
+<p>I created a User object to store searched user</p>
+
+<pre><code>App.User = Em.Object.extend({
+    name: null,
+    avatar: null
+});
+</code></pre>
+
+<p>And a Repository object to store the Github repository</p>
+
+<pre><code>App.Repository = Em.Object.extend({
+    language: null,
+    name: null,
+    updated_at: null,
+    description: null
+});
+</code></pre>
+
+<p>Here, I store two classes in App (App.User and App.Repository). Upper case of first letter implies it's a class.</p>
+
+<h1>View</h1>
+
+<p>Ember provides some views, we can just extend it for our use.</p>
+
+<pre><code>App.SearchTextField = Em.TextField.extend({
+    insertNewline: function(){
+        App.repositoriesController.loadRepositories();
+    }
+});
+</code></pre>
+
+<p>insertNewline is a pre-defined method, every time users push enter in the search field triggers it.</p>
+
+<p>The TextField extended from TextSupport, for more pre-defined TextSupport methods, you can check <a href="http://docs.emberjs.com/#doc=packages_ember-handlebars_lib_controls_text_support.js&amp;src=true">Ember's API for TextField</a>.</p>
+
+<h1>Controllers</h1>
+
+<p>Controller plays an important role, they control which view to show, and which model to access.</p>
+
+<h2>repositoryController</h2>
+
+<p>"username" property binds to the search TextField. To bind a property from handlebars, use "valueBinding". For example:</p>
+
+<pre><code>
+</code></pre>
+
+<p>placeholder is html5 feature, which use to show default value of the input. While binding the property, every changes in the front will updates the property in the background.</p>
+
+<p><code>loadRepositories()</code> search the user's repositories from Github API, then push into its own array (namely, "content" property).</p>
+
+<h2>recentUsersController</h2>
+
+<p>Hence it extend from <code>ArrayController</code>, you cans use <code>this.pushObject()</code> and <code>this.removeObject()</code> to manipulate the users array.</p>
+
+<p>Another point to notice is "view.context". Let's look at <code>removeUser()</code> method. In the front end, a hyper link will sends a view to the back end.</p>
+
+<pre><code>&lt;a href="#" title="remove" \{\{action "removeUser" target="App.recentUsersController"\}\}&gt;X&lt;/a&gt;
+</code></pre>
+
+<p>This line is wrapped by <code></code> and <code></code>, the return value will be the iterated view of recentUsersController, which is, A view object which wraps a User model. To obtain the User object, you use view.context to achieve it.</p>
+
+<h1>Run it up</h1>
+
+<p>It's dead easy to run this tool, you have to put it under a http server. Why? some browsers such as Chrome cannot access https protocol via local files.</p>
+
+<p>Once you're ready, just open the index.html and try. For the complete codes you can <a href="https://github.com/eguitarz/ember-github-example/zipball/master">down load it from Github</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

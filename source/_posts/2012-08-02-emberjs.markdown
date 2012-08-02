@@ -1,0 +1,93 @@
+---
+layout: post
+title: "Ember.js practice: Github tool"
+date: 2012-08-02 15:24
+comments: true
+categories: emberjs
+---
+Why would I build this tool?
+============================
+Simply speaking, I want to practice Ember.js. Many guys practicing their first app by doing th Todo list. But I wanna try something different. So I picked Github as my target.
+
+Ember.js, what?
+===============
+Ember.js is a javascript web framework comes from the open source project [SproutCore](http://sproutcore.com/), which Apple was contributed greatly in.
+
+Ember.js structured in MVC pattern, with a built-in template engine. Comparing to Backbone.js (Another javascript framework), it's simpler to developers. Backbone.js provides flexibility but you need to write codes by yourself in most cases. Ember.js, on the opposite, might not as flex as Backbone.js is, but it contains already-built structures.
+
+Functions
+=========
+The interface will be pretty simple, a search input field, a recent search results, and the repositories of the searched user. You type the user name in the search box and send the request, I return the repositories of the user.
+
+First things first
+==================
+I have to say I did not start it all by myself. First I browse Andy Matthews' [Flame on! A beginner's guide to Ember.js](http://www.adobe.com/devnet/html5/articles/flame-on-a-beginners-guide-to-emberjs.html). It's a simple twitter app built on ember.js. I "borrowed" his code and made some modifications. If you need to learn everything from scraps, his guide is quite a good start point. I will not cover too many basic stuffs here.
+
+On the way!
+===========
+It's easy to create Ember app, only one line to type:
+    App = Em.Application.create();
+
+Model
+=====
+I created a User object to store searched user
+    
+    App.User = Em.Object.extend({
+        name: null,
+        avatar: null
+    });
+
+And a Repository object to store the Github repository
+    
+    App.Repository = Em.Object.extend({
+        language: null,
+        name: null,
+        updated_at: null,
+        description: null
+    });
+
+Here, I store two classes in App (App.User and App.Repository). Upper case of first letter implies it's a class.
+
+View
+====
+Ember provides some views, we can just extend it for our use.
+
+    App.SearchTextField = Em.TextField.extend({
+        insertNewline: function(){
+            App.repositoriesController.loadRepositories();
+        }
+    });
+
+insertNewline is a pre-defined method, every time users push enter in the search field triggers it.
+
+The TextField extended from TextSupport, for more pre-defined TextSupport methods, you can check [Ember's API for TextField](http://docs.emberjs.com/#doc=packages_ember-handlebars_lib_controls_text_support.js&src=true).
+
+Controllers
+===========
+Controller plays an important role, they control which view to show, and which model to access.
+
+## repositoryController
+
+"username" property binds to the search TextField. To bind a property from handlebars, use "valueBinding". For example:
+
+    {{view App.SearchTextField placeholder="Github username" valueBinding="App.repositoriesController.username"}}
+
+placeholder is html5 feature, which use to show default value of the input. While binding the property, every changes in the front will updates the property in the background.
+
+`loadRepositories()` search the user's repositories from Github API, then push into its own array (namely, "content" property).
+
+## recentUsersController
+
+Hence it extend from `ArrayController`, you cans use `this.pushObject()` and `this.removeObject()` to manipulate the users array.
+
+Another point to notice is "view.context". Let's look at `removeUser()` method. In the front end, a hyper link will sends a view to the back end.
+
+    <a href="#" title="remove" \{\{action "removeUser" target="App.recentUsersController"\}\}>X</a>
+
+This line is wrapped by `{{#each App.recentUsersController.reverse}}` and `{{/each}}`, the return value will be the iterated view of recentUsersController, which is, A view object which wraps a User model. To obtain the User object, you use view.context to achieve it.
+
+Run it up
+=========
+It's dead easy to run this tool, you have to put it under a http server. Why? some browsers such as Chrome cannot access https protocol via local files.
+
+Once you're ready, just open the index.html and try. For the complete codes you can [down load it from Github](https://github.com/eguitarz/ember-github-example/zipball/master).

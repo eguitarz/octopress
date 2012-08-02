@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>邊旅行邊 hacking - Dale Ma</title>
+  <title>Ember.js practice: Github tool - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="這篇文章是在等待轉機時打的，在這之前我從台北飛到上海住了一夜，又從上海飛到溫哥華，現在只剩意志力能讓雙手在鍵盤上敲打，如果把手停下一分鐘大概就會就此昏睡過去。 不論是工作還是自我學習，我不喜歡在資源太充足的情況下做事。如果有某種程度上的限制，我認為能讓自己更珍惜眼前的資源，進而好好善用他們。 &hellip;">
+  <meta name="description" content="Why would I build this tool? Simply speaking, I want to practice Ember.js. Many guys practicing their first app by doing th Todo list. But I wanna &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/06/22/travelhacking">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/08/02/emberjs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">邊旅行邊 Hacking</h1>
+      <h1 class="entry-title">Ember.js Practice: Github Tool</h1>
     
     
       <p class="meta">
@@ -97,22 +97,103 @@
   
 
 
-<time datetime="2012-06-22T21:38:00+08:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2012</time>
+<time datetime="2012-08-02T15:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>這篇文章是在等待轉機時打的，在這之前我從台北飛到上海住了一夜，又從上海飛到溫哥華，現在只剩意志力能讓雙手在鍵盤上敲打，如果把手停下一分鐘大概就會就此昏睡過去。</p>
+<div class="entry-content"><h1>Why would I build this tool?</h1>
 
-<p>不論是工作還是自我學習，我不喜歡在資源太充足的情況下做事。如果有某種程度上的限制，我認為能讓自己更珍惜眼前的資源，進而好好善用他們。聽起來有點自虐，但這是 hacking 的精髓所在，如果你的辦公桌可以擺下三台桌機加一台筆電，如果你的時間無窮無盡，就像拿了遙控器對現實按了暫停一樣，把你想做完的事都做完以後再解除暫停，難道這樣效率就會比較高？不，你會因為過度安逸，而疏於你本來想做的事。（想想你六日碰的程式碼比較多還是平日上班時？）</p>
+<p>Simply speaking, I want to practice Ember.js. Many guys practicing their first app by doing th Todo list. But I wanna try something different. So I picked Github as my target.</p>
 
-<p>趁我有15天內飛半個地球的行程，打算在15天內利用空閑時間學習和 coding 。當然，會有大部分時間都在交通工具上渡過，同時網路功能將會受到限制。聽起來很糟，但我發現這段時間我效率超好。</p>
+<h1>Ember.js, what?</h1>
 
-<p>我在上飛機前會先把一些網頁資料開在瀏覽器裡，上飛機的時候有空就會拿出來看。等着過海關的時候，我會盤算我的程式流程要怎麼走，資料庫裡要放些什麼表格。飛機上遇到氣流不穩，我仍然拿著筆電寫著程式，反正我哪也不能去（我的筆電有換上SSD，所以不擔心被機身震動影響）。</p>
+<p>Ember.js is a javascript web framework comes from the open source project <a href="http://sproutcore.com/">SproutCore</a>, which Apple was contributed greatly in.</p>
 
-<p>目前為止，我蠻滿意這段旅程的工作產出和學習成效。接下來要飛到歐洲搭遊輪，我不打算在遊輪上買貴死人的網路，所以接下來會準備個 7 天份的閱讀資料，上去找時間研讀。在閱讀的你，如果這假日有空，不妨去個沒有網路的咖啡廳，來場“資源受限”的 coding 下午茶試試。</p>
+<p>Ember.js structured in MVC pattern, with a built-in template engine. Comparing to Backbone.js (Another javascript framework), it&#8217;s simpler to developers. Backbone.js provides flexibility but you need to write codes by yourself in most cases. Ember.js, on the opposite, might not as flex as Backbone.js is, but it contains already-built structures.</p>
+
+<h1>Functions</h1>
+
+<p>The interface will be pretty simple, a search input field, a recent search results, and the repositories of the searched user. You type the user name in the search box and send the request, I return the repositories of the user.</p>
+
+<h1>First things first</h1>
+
+<p>I have to say I did not start it all by myself. First I browse Andy Matthews&#8217; <a href="http://www.adobe.com/devnet/html5/articles/flame-on-a-beginners-guide-to-emberjs.html">Flame on! A beginner&#8217;s guide to Ember.js</a>. It&#8217;s a simple twitter app built on ember.js. I &#8220;borrowed&#8221; his code and made some modifications. If you need to learn everything from scraps, his guide is quite a good start point. I will not cover too many basic stuffs here.</p>
+
+<h1>On the way!</h1>
+
+<p>It&#8217;s easy to create Ember app, only one line to type:</p>
+
+<pre><code>App = Em.Application.create();
+</code></pre>
+
+<h1>Model</h1>
+
+<p>I created a User object to store searched user</p>
+
+<pre><code>App.User = Em.Object.extend({
+    name: null,
+    avatar: null
+});
+</code></pre>
+
+<p>And a Repository object to store the Github repository</p>
+
+<pre><code>App.Repository = Em.Object.extend({
+    language: null,
+    name: null,
+    updated_at: null,
+    description: null
+});
+</code></pre>
+
+<p>Here, I store two classes in App (App.User and App.Repository). Upper case of first letter implies it&#8217;s a class.</p>
+
+<h1>View</h1>
+
+<p>Ember provides some views, we can just extend it for our use.</p>
+
+<pre><code>App.SearchTextField = Em.TextField.extend({
+    insertNewline: function(){
+        App.repositoriesController.loadRepositories();
+    }
+});
+</code></pre>
+
+<p>insertNewline is a pre-defined method, every time users push enter in the search field triggers it.</p>
+
+<p>The TextField extended from TextSupport, for more pre-defined TextSupport methods, you can check <a href="http://docs.emberjs.com/#doc=packages_ember-handlebars_lib_controls_text_support.js&amp;src=true">Ember&#8217;s API for TextField</a>.</p>
+
+<h1>Controllers</h1>
+
+<p>Controller plays an important role, they control which view to show, and which model to access.</p>
+
+<h2>repositoryController</h2>
+
+<p>&#8220;username&#8221; property binds to the search TextField. To bind a property from handlebars, use &#8220;valueBinding&#8221;. For example:</p>
+
+<p>placeholder is html5 feature, which use to show default value of the input. While binding the property, every changes in the front will updates the property in the background.</p>
+
+<p><code>loadRepositories()</code> search the user&#8217;s repositories from Github API, then push into its own array (namely, &#8220;content&#8221; property).</p>
+
+<h2>recentUsersController</h2>
+
+<p>Hence it extend from <code>ArrayController</code>, you cans use <code>this.pushObject()</code> and <code>this.removeObject()</code> to manipulate the users array.</p>
+
+<p>Another point to notice is &#8220;view.context&#8221;. Let&#8217;s look at <code>removeUser()</code> method. In the front end, a hyper link will sends a view to the back end.</p>
+
+<pre><code>&lt;a href="#" title="remove" \{\{action "removeUser" target="App.recentUsersController"\}\}&gt;X&lt;/a&gt;
+</code></pre>
+
+<p>This line is wrapped by <code>and</code>, the return value will be the iterated view of recentUsersController, which is, A view object which wraps a User model. To obtain the User object, you use view.context to achieve it.</p>
+
+<h1>Run it up</h1>
+
+<p>It&#8217;s dead easy to run this tool, you have to put it under a http server. Why? some browsers such as Chrome cannot access https protocol via local files.</p>
+
+<p>Once you&#8217;re ready, just open the index.html and try. For the complete codes you can <a href="https://github.com/eguitarz/ember-github-example/zipball/master">down load it from Github</a>.</p>
 </div>
 
 
@@ -135,12 +216,12 @@
   
 
 
-<time datetime="2012-06-22T21:38:00+08:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2012</time>
+<time datetime="2012-08-02T15:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/hacking/'>hacking</a>
+    <a class='category' href='/blog/categories/emberjs/'>emberjs</a>
   
 </span>
 
@@ -149,7 +230,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/06/22/travelhacking/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/06/22/travelhacking/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/08/02/emberjs/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/08/02/emberjs/" >Tweet</a>
   
   
   
@@ -158,10 +239,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/17/railsscheduler/" title="Previous Post: 每日定時寄信 in Rails 3">&laquo; 每日定時寄信 in Rails 3</a>
+        <a class="basic-alignment left" href="/blog/2012/07/04/newlife/" title="Previous Post: 放空後其實更清醒">&laquo; 放空後其實更清醒</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/04/newlife/" title="Next Post: 放空後其實更清醒">放空後其實更清醒 &raquo;</a>
       
     </p>
   </footer>
