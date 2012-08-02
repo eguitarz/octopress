@@ -6,7 +6,7 @@ sharing: false
 footer: true
 ---
 
-{% img left /images/me.png 200 %}
+{% img left /images/portrait.jpg 200 %}
 
 {% blockquote %}
 好奇心旺盛，喜歡幽默的事情，建造、摧毀是興趣，從程式到生活方式，都是研究範圍。
