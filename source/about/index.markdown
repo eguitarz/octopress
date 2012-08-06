@@ -4,6 +4,7 @@ title: "About # Dale Ma"
 comments: false
 sharing: false
 footer: true
+external-url: http://aboutdale.herokuapp.com
 ---
 
 {% img left /images/portrait.jpg 200 %}
