@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-08-06T16:36:11+08:00</updated>
+  <updated>2012-08-26T07:16:16+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How do I train my rails skill?]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/08/26/how-do-i-train-my-rails-skill/"/>
+    <updated>2012-08-26T07:11:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/08/26/how-do-i-train-my-rails-skill</id>
+    <content type="html"><![CDATA[<p>To master a skill, you have to pay 10000 hours in, then you will be the guru in that field.</p>
+
+<p>I believe repeating is the best way to master something well. I practice CRUD almost everyday. How? by building a todo list web site.</p>
+
+<p>It sucks so much time at beginning, but once you are really familiar with Rails, you can create one less than 10 minutes. Such as <a href="http://www.youtube.com/watch?v=5aaHm9VImVE&amp;t=4m0s">this guy</a>, his name is Jserv, he can write an OS prototype in 15 minutes!</p>
+
+<p>In addition to repeating, another thing is tool. You should prepare some tools to increase your speed on developing. Here are some tools worth to try:</p>
+
+<ul>
+<li><a href="http://www.sublimetext.com/2">Sublime 2</a> or <a href="http://www.vim.org/">VIM</a></li>
+<li><a href="http://livereload.com/">Livereload</a>, auto refreshes your browser, it helps you to focus on your code.</li>
+<li><a href="http://inductionapp.com/">Induction</a>, a polyglot database client.</li>
+</ul>
+
+
+<p>Welcome to tell me if you know any goodies to share ~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Deploy static site on heroku]]></title>
