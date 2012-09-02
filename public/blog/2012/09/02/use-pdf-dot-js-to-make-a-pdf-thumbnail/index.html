@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: hacking - Dale Ma</title>
+  <title>Use pdf.js to make a PDF thumbnail - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="Category: hacking">
+  <meta name="description" content="If you want to make a PDF cover image, what will you do? Grab a monster library just only for making thumbnail? No, you don&#8217;t. It&#8217;s dead &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.comblog/categories/hacking">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/09/02/use-pdf-dot-js-to-make-a-pdf-thumbnail">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,35 +76,127 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Hacking</h1>
+    
+      <h1 class="entry-title">Use pdf.js to Make a PDF Thumbnail</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T08:52:00+08:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>If you want to make a PDF cover image, what will you do? Grab a monster library just only for making thumbnail? No, you don&#8217;t. It&#8217;s dead easy to go with <a href="https://github.com/mozilla/pdf.js">pdf.js</a>.</p>
 
-  
-  <h2>2012</h2>
+<p>cavas.html.haml</p>
 
-<article>
-  
-<h1><a href="/blog/2012/06/22/travelhacking/">邊旅行邊 hacking</a></h1>
-<time datetime="2012-06-22T21:38:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>22</span> <span class='year'>2012</span></time>
+<pre><code>!!!
+%html
+  %head
+    %script{:src =&gt; "javascripts/pdf.js", :type =&gt; "text/javascript"}
+  %body
+    :javascript
+      'use strict';
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/hacking/'>hacking</a></span>
-</footer>
+      PDFJS.workerSrc = "javascripts/pdf.js";
+      $(document).ready(function() {
+        PDFJS.getDocument('iperl.pdf').then(function(pdf){
 
+          pdf.getPage(1).then(function(page) {
+            var viewport = page.getViewport(0.5);
+            var canvas = document.getElementById('box');
+            var ctx = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
 
-</article>
+            var renderContext = {
+              canvasContext: ctx,
+              viewport: viewport
+            };
 
+            page.render(renderContext).then(function(){
+              //set to draw behind current content
+              ctx.globalCompositeOperation = "destination-over";
+
+              //set background color
+              ctx.fillStyle = "#ffffff";
+
+              //draw background / rect on entire canvas
+              ctx.fillRect(0,0,canvas.width,canvas.height);
+              var img = canvas.toDataURL();
+              $("#thumbnail").html('&lt;img src="'+img+'"/&gt;');
+            });
+
+          });
+        });
+
+      })
+  #thumbnail
+  %canvas#box{:style =&gt; "border:1px solid black;background-color: white;"}/
+</code></pre>
+
+<p>The result contains an image and a canvas, quite simple, isn&#8217;t it?</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Dale Ma</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T08:52:00+08:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/09/02/use-pdf-dot-js-to-make-a-pdf-thumbnail/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/09/02/use-pdf-dot-js-to-make-a-pdf-thumbnail/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/26/how-do-i-train-my-rails-skill/" title="Previous Post: How do I train my rails skill?">&laquo; How do I train my rails skill?</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
