@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-09-10T13:31:31+08:00</updated>
+  <updated>2012-10-09T10:29:07+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -14,10 +14,21 @@
 
   
   <entry>
-    <title type="html"><![CDATA[我想寫個這樣的軟體]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/09/10/wo-xiang-xie-ge-zhe-yang-de-ruan-ti/"/>
+    <title type="html"><![CDATA[Posterino - Put your photos together]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/10/09/posterino/"/>
+    <updated>2012-10-09T10:27:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/10/09/posterino</id>
+    <content type="html"><![CDATA[<p>I found <a href="http://www.mycookingdiary.com/">My cooking Diary</a> recently. It shows a amazing present of photos, makes me really wondering the software it uses.</p>
+
+<p>It is <a href="http://zykloid.com/posterino">Posterino</a>, which put many photos into one frame. It&#8217;s not the newest thing, but it&#8217;s delicate and useful.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iwanttowriteasoftware]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/09/10/iwanttowriteasoftware/"/>
     <updated>2012-09-10T13:27:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/09/10/wo-xiang-xie-ge-zhe-yang-de-ruan-ti</id>
+    <id>http://dale-ma.heroku.com/blog/2012/09/10/iwanttowriteasoftware</id>
     <content type="html"><![CDATA[<p>標題看來具體，但內容其實是根據 Seth Godin 的 <a href="http://www.ted.com/talks/lang/en/seth_godin_on_sliced_bread.html">How to get your ideas to spread</a> 和 37 Signals 的創業故事有感而發的想法。</p>
 
 <p>寫軟體，桌面軟體、手機軟體、平板軟體、網路軟體，任何種類我都不排斥。我只想寫對我有用，也有人用的軟體。對我有用這件事很容易辦到，從生活中的瑣事歸納出一套固定邏輯，就可以變成一套軟體。但該怎樣確保寫出來的軟體是對別人也有用，他們看了眼睛會為之一亮，會拍案叫絕，會愛不釋手？</p>
