@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-10-27T10:50:43+08:00</updated>
+  <updated>2012-10-28T10:14:24+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[松浦彌太郎的輕生活練習]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/10/28/light-life/"/>
+    <updated>2012-10-28T10:11:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/10/28/light-life</id>
+    <content type="html"><![CDATA[<p>你身上是否背着不必要的行囊？
+你可以斷言，自己的生活輕鬆簡單嗎？</p>
+
+<p>這兩句卷頭詞讓我想要一窺松浦彌太郎的著作“<code>放下包袱的輕生活學習</code>”。這本書不是教你如何收納物品把家裡整理的井然有序，這本書著重在心靈的層次衍生至對於人生的省思。</p>
+
+<p>剛開始講珍惜，珍惜每次和人見面的機會，珍惜每次打招呼的片刻，珍惜獨自相處的時機，培養蹦蹦跳跳的工作態度。</p>
+
+<p>順著與人相處的話題，進入到工作上的建議。觀察、推理、溝通，是他認為職場上發光發熱的利器。他也倡導工作與生活融合在一起，大方的將私底下的一面和同事分享。</p>
+
+<p>松浦彌太郎也談到了反思的力量，他過去是個渾渾噩噩過生活的失敗者。他思考着究竟是什麼力量改變了他，讓他現在能夠活的亮眼。</p>
+
+<p>最後，他提出了人生資產，一種無形的資產。每個人都該好好列出自己的“人生資產”，善於溝通、喜歡交朋友、學習力強…等。多花時間投資於自己<code>擅長的</code>，少碰那些就算投資也不會有太大成效的非專精特長。</p>
+
+<p>松浦先生某種層面上和我有些相似，看了他的書後令我心生共鳴。我也希望能和他一樣，趁著年輕到外面看看自己的能耐。他 20 多歲時流浪到美國，過著餐風露宿的生活。初衷是找尋自由，最後也讓他找到了自己對於自由的答案。</p>
+
+<p>現在這個年紀的我，還有太多的疑惑，還有太多的猜想，對於人生充滿了不確定。理出肉眼看不見的輕便行囊，往前走，看來是個必然的下一步了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[From the first sun shine to the last moon light]]></title>
@@ -971,66 +995,6 @@ Both should work well. And http://192.168.0.2 should be no response.</p>
 <h3>竟然還有圖表熱鍵！</h3>
 
 <p>Network 圖表有些方便的熱鍵，可以用<code>h</code> <code>j</code> <code>k</code> <code>l</code>來上下左右移動( vim  玩家高興嗎？)，<code>shift + h</code> or <code>shift + j</code> or <code>shitf + k</code> or <code>shift + l</code>跳到上下左右的邊界，<code>t</code>來顯示或關閉 branch 名稱。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby on Rails - 6 篇文上軌道]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/03/28/articles-to-rails/"/>
-    <updated>2012-03-28T08:55:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/03/28/articles-to-rails</id>
-    <content type="html"><![CDATA[<p>你覺得假日生活無聊，想找點新樂子，但聰明如你不想和凡夫俗子一樣在夜店泡上一整晚，也許可以開始Ruby on Railse的學習之路。如果你有網站程式的背景，那底下這幾篇文章大概4小時內就可以消化完畢‧可以學到</p>
-
-<ul>
-<li><p>安裝Ruby on Rails的最佳做法</p></li>
-<li><p>Ruby的語法</p></li>
-<li><p>用Rails框架實做含資料庫的網站</p></li>
-<li><p>Rails開發者常用的套件(gems)</p></li>
-</ul>
-
-
-<h3><a href="http://blog.eddie.com.tw/2011/04/08/rvm-and-gemsets/">RVM and Gemsets</a></h3>
-
-<p>RVM是Ruby developer必備的實驗室，可以準備很多不同版本的Ruby來跑Project。每個Project的環境需求都不盡相同，有了RVM就不必煩惱在不同環境間切換的困擾。這篇教你如何安裝RVM。</p>
-
-<h3><a href="http://ihower.tw/rails3/installation.html">安裝Rails開發環境</a></h3>
-
-<p>安裝Rails、資料庫，介紹開發環境和Gems。</p>
-
-<h3><a href="http://www.ruby-lang.org/zh_TW/documentation/quickstart/">二十分鐘 Ruby 體驗</a></h3>
-
-<p>非常精美的Ruby教學文件，讓你知道Ruby可不是珠寶店裡的紅寶石&#8230;</p>
-
-<h3><a href="http://ihower.tw/rails3/basic.html">打造 CRUD 應用程式</a></h3>
-
-<p>和下面一篇是連貫的，先實作完這篇的程式，再看下篇。這篇是Rails新手的重點文章。</p>
-
-<h3><a href="http://ihower.tw/rails3/restful.html">RESTful 應用程式</a></h3>
-
-<p>主要是講RESTful在rails下怎麼達成。看完後你已經可以100%唬住Rails門外漢了！</p>
-
-<h3><a href="http://blog.xdite.net/posts/2011/10/09/10-ruby-developer-must-have-tools/">十個 Ruby Web Developer 應該熟悉的工具</a></h3>
-
-<p>我認為Git是裡面最需要也最花時間來熟悉的，git init, git add, git commit, git branch, git checkout等是git很常用到的指令。從svn轉戰git會發現有很多觀念不同，不小心就會誤用。</p>
-
-<h3>More gems…</h3>
-
-<p>Rails有很多前人寫好的套件，花在了解套件的時間上甚至會比寫自己的code還多。</p>
-
-<ul>
-<li><a href="https://github.com/chriseppstein/compass">compass</a> (SCSS強化版，簡單想就是用變數和類物件導向的CSS)</li>
-<li><a href="https://github.com/plataformatec/devise">devise</a> (認證工具，代表不用刻登入、登出的UI和邏輯，YAY!!)</li>
-<li><a href="https://github.com/plataformatec/simple_form">simple_form</a> (堪稱比Rails內建form_for更好用)</li>
-<li><a href="https://github.com/amatsuda/kaminari">kaminari</a> (分頁工具，資料多的時候不需要自己寫分頁邏輯)</li>
-<li><a href="https://github.com/dchelimsky/rspec">rspec</a> (比unit test更厲害的Behavioral Driven Development測試工具)</li>
-<li><a href="https://github.com/cucumber/cucumber">cucumber</a> (Behavioral Driven Development的工具，先讓你寫說明文件再開發，說明文件是程式化的語法，跟rspec是好夥伴)</li>
-</ul>
-
-
-<h3>Fun projects…</h3>
-
-<p><a href="https://github.com/imathis/octopress">octopress</a>
-有趣的部落格軟體，不需要用資料庫，而是用git來控制文章，十分適合hacker的玩具。</p>
 ]]></content>
   </entry>
   

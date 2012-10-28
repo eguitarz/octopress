@@ -87,12 +87,16 @@
         <lastmod>2012-10-27T10:50:31+08:00</lastmod>
     </url>
     <url>
+        <loc>http://dale-ma.heroku.com/blog/2012/10/28/light-life/</loc>
+        <lastmod>2012-10-28T10:12:14+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://dale-ma.heroku.com/about/</loc>
         <lastmod>2012-08-06T16:28:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/blog/archives/</loc>
-        <lastmod>2012-10-27T10:50:31+08:00</lastmod>
+        <lastmod>2012-10-28T10:12:14+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/contact/</loc>
@@ -100,6 +104,6 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/</loc>
-        <lastmod>2012-10-27T10:50:31+08:00</lastmod>
+        <lastmod>2012-10-28T10:12:14+08:00</lastmod>
     </url>
 </urlset>
