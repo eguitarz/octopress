@@ -9,8 +9,7 @@
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="你身上是否背着不必要的行囊？
-你可以斷言，自己的生活輕鬆簡單嗎？ 這兩句卷頭詞讓我想要一窺松浦彌太郎的著作“放下包袱的輕生活學習”。這本書不是教你如何收納物品把家裡整理的井然有序，這本書著重在心靈的層次衍生至對於人生的省思。 剛開始講珍惜，珍惜每次和人見面的機會，珍惜每次打招呼的片刻， &hellip;">
+  <meta name="description" content="PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。 IPN 是什麼？ 當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 POST 通知回來，這就是 IPN (Instant Payment Notification)。 實作原則 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/29/paypal-ipn/">玩網路金流絕不能不知的 PayPal IPN</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-29T08:05:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。</p>
+
+<h2>IPN 是什麼？</h2>
+
+<p>當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 <code>POST</code> 通知回來，這就是 IPN (Instant Payment Notification)。</p>
+
+<h2>實作原則</h2>
+
+<p>IPN 驗證分為這些步驟：</p>
+
+<ol>
+<li>API / button 引導使用者在 PayPal 完成結帳。</li>
+<li>PayPal <code>POST</code> 一串包含使用者與賣家資訊的訊息。</li>
+<li>賣家 server 檢查完這串訊息無誤後，原封不動的 <code>POST</code> 回 PayPal。</li>
+<li>PayPal 確認賣家回傳的訊息無誤後，<code>POST</code> 一個 <code>VERIFIED</code> 或 <code>INVALID</code> 的字串。</li>
+</ol>
+
+
+<p>關鍵在於要檢查 <code>2.</code> 裡面的訊息，避免商業詐欺。以下是必須檢查的項目：</p>
+
+<ol>
+<li><code>receiver_email</code> = gm_1231902686_biz@paypal.com 確認是賣家自己的 mail。</li>
+<li><code>txn_id</code> = 61E67681CH3238416 這代表交易編號，有時候 PayPal會回傳兩個相同的交易編號，這時要避免重覆在賣家的 server 上認證，避免連續賣出兩次商品。</li>
+<li><code>payment_status</code> = Completed 代表付款完成，可別讓人沒付完錢就送出產品 / 服務了。</li>
+</ol>
+
+
+<h2>參考資料</h2>
+
+<p><a href="http://bit.ly/TodWRL">PayPal IPN 官方文件</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1008,97 +1072,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/29/image-injection/">Image Injection 輕鬆檢查身份認證</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-29T17:18:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>難道想吃飯一定要學會種稻？</h2>
-
-<p>最近在做網站外認證的事情，也就是在別人的網頁上要認出使用者的身份，除了拿刀子要別人把原始碼拿來讓我加認證程式碼外，還有更好的選擇。無論如何勢必要連回自己的網站做認證，你可以洋洋灑灑的寫個 Ajax 認證機制，甚至還實作了 OAuth 2.0 。喔，不，我是懶惰工程師，費工的事我可不愛幹。</p>
-
-<p>我的目標只是要在別人的網站背後開一個通道，這個通道可以讓我知道使用者是否已經登入我的網站，並且使用者可以利用這個通道向我發送指令。</p>
-
-<p>有個妙招可以做到上述這件事，透過使用者點擊 bookmark 注入 javascript 和圖片到他正在瀏覽的網頁即可。</p>
-
-<h2>圖片，你傳遞資訊的好朋友</h2>
-
-<p>瀏覽器對圖片的限制很寬鬆，當讀取網頁時，也同時在做非同步的圖片讀取。這些圖片可以來自其它網站，而其它網站接到請求時可以根據使用者是否擁有 session 決定要回傳什麼圖片。（這不就很巧妙的做到 ajax 認證會做的事了？）</p>
-
-<p>當目標網頁接收到圖片時，我們可以注入 javascript 讀取圖片的類型而知道使用者是否已經擁有自身網站的 session。</p>
-
-<p>整個過程圖片是就像來源網站的代理人，使用者向來源網站請求圖片，來源網站將資訊透過圖片表達。最簡單的方式可以依據使用者是否登入，回傳寬度為 1 或 2 的空白圖片。</p>
-
-<h2>怎麼做？</h2>
-
-<h3>製作一個可以注入 javascript 的書籤。</h3>
-
-<pre><code>javascript:(function(){MY_SCRIPT=document.createElement('SCRIPT');MY_SCRIPT.type='text/javascript';MY_SCRIPT.src='http://127.0.0.1:3000/test.js';document.body.appendChild(MY_SCRIPT)})();
-</code></pre>
-
-<p><code>my_script.js</code>是用來 inject 圖片和讀取圖片寬度的 javascript 。</p>
-
-<h3>製作 my_script.js</h3>
-
-<pre><code>document.body.innerHTML += '\&lt;innerHTMLmg id="MY_IMG" src="path/to/my/image" style="display:none;"&gt;';
-</code></pre>
-
-<p>現在當使用者瀏覽網站時，點了我們的 bookmark 就會自動注入圖片到當下的網站，由於圖片是隱藏的，使用者並不會發現。</p>
-
-<h3>加入圖片讀取機制</h3>
-
-<pre><code>在 my_script.js 加上
-
-read_img = function() {
-  while (!document.getElementById("MY_IMG")) {}
-          var w = document.getElementById("MY_IMG").width;
-
-          if (w &gt; 0) {
-            if          (w == 1) {
-              alert("User has logged in. width = " + w );
-            } else {
-                            alert("Please login, width = " + w);
-            }
-          }
-}
-read_img();
-</code></pre>
-
-<p>將圖片的路徑設定好後，可以在任意的網頁點選書籤，會有一個對話框檢查注入的圖片寬度，程式碼裡 width = 1 代表已經登入，其他則尚未登入。</p>
-
-<p>至於動態產生圖片的部分，可以參考 <a href="http://www.google.com.tw/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0CC4QFjAA&amp;url=http%3A%2F%2Fwww.w3.org%2FGraphics%2FGIF%2Fspec-gif89a.txt&amp;ei=XgadT_S6CqXnmAWPm5TODg&amp;usg=AFQjCNGkPzr6fu-V-T05Uzu6aCxGaZ_iRA&amp;sig2=BNcPCLS_4sFTBpJiAQ8eIg">GIF spec</a> 自己生一個假的 gif 圖片。</p>
-
-<p>要傳送指令的話，也只需在請求圖片時加上 get 參數即可。（例如： &lt;img src=&#8221;MY_IMG&#8221; src=&#8221;path/to/my/image/image.gif?cmd=123&#8221;）</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1112,6 +1085,10 @@ read_img();
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/10/29/paypal-ipn/">玩網路金流絕不能不知的 PayPal IPN</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/10/28/light-life/">松浦彌太郎的輕生活練習</a>
@@ -1147,10 +1124,6 @@ read_img();
     
       <li class="post">
         <a href="/blog/2012/08/02/emberjs/">Ember.js practice: Github tool</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/04/newlife/">放空後其實更清醒</a>
       </li>
     
   </ul>
