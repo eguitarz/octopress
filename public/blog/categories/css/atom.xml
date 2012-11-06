@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: css | Dale Ma]]></title>
+  <link href="http://dale-ma.heroku.com/blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://dale-ma.heroku.com/"/>
+  <updated>2012-11-06T20:15:57+08:00</updated>
+  <id>http://dale-ma.heroku.com/</id>
+  <author>
+    <name><![CDATA[Dale Ma]]></name>
+    <email><![CDATA[dalema22@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Invisible scrollbar]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/11/06/invisible-scrollbar/"/>
+    <updated>2012-11-06T20:00:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/11/06/invisible-scrollbar</id>
+    <content type="html"><![CDATA[<p>You want to hide your scroll bar, but you still want to keep the scrolling ability. Then you're gonna need an invisible scroll bar, this article might quite fit your needs.</p>
+
+<p>There is no any javascript are required to make this work. The concept is dead simple. You need 2 divs. One is "wrapper", another is "content". You put your context into "content", and there sure do will have a scroll bar there. Set the "content" size, and set the "wrapper" size, make the "wrapper"'s size a bit smaller than "content". For more accuracy, which is "wrapper"'s width minus "content" scroll bar's width.</p>
+
+<p>Last step is set "wrapper"'s <code>overflow-x: hidden</code>, and <code>overflow-y: auto</code>. That's all. Period.</p>
+
+<p>For the code please refer to
+<a href="https://gist.github.com/4024297">https://gist.github.com/4024297</a></p>
+]]></content>
+  </entry>
+  
+</feed>

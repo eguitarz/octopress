@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Gems 混搭空想 - Dale Ma</title>
+  <title>Category: css - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="空想所根據的規則 Ruby 的 Gems 五花八門，其中不乏很多有特色的 Gems 。常常在想是不是有可能利用這些 Gems 搭出有趣但不一定要實用的服務呢？ 大致上， Gems 可以分為 Front-end 和 Back-end 以及 Mixed ，我混搭的第一步就是先搜集一些有趣的Gems， &hellip;">
+  <meta name="description" content="Category: css">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/04/09/mix-gem">
+  <link rel="canonical" href="http://dale-ma.heroku.comblog/categories/css">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,141 +76,35 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Gems 混搭空想</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-09T08:43:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2012</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Css</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><h2>空想所根據的規則</h2>
 
-<p>Ruby 的 Gems 五花八門，其中不乏很多有特色的 Gems 。常常在想是不是有可能利用這些 Gems 搭出有趣但不一定要實用的服務呢？</p>
+  
+  <h2>2012</h2>
 
-<p>大致上， Gems 可以分為 Front-end 和 Back-end 以及 Mixed ，我混搭的第一步就是先搜集一些有趣的Gems，然後再隨機的組合。基本上是從 Front-end 和 Back-end 裡面各抽出一個候選人，接著想想搭在一起會變成什麼玩意。當然，搭出來的可能是狗屁不通的結果，但是，一切都以好玩為出發點。</p>
+<article>
+  
+<h1><a href="/blog/2012/11/06/invisible-scrollbar/">Invisible scrollbar</a></h1>
+<time datetime="2012-11-06T20:00:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>06</span> <span class='year'>2012</span></time>
 
-<h2>Front-end gems</h2>
-
-<p>Front-end 比較偏向內容的呈現，可能是輸出圖形，也可能是輸出文字或是兩者。</p>
-
-<ul>
-<li><a href="https://github.com/imathis/octopress">octopress</a>：知名的部落格架站系統</li>
-<li><a href="https://github.com/schacon/showoff">showoff</a>：web 介面的投影片</li>
-</ul>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>css</a></span>
+</footer>
 
 
-<h2>Back-end gems</h2>
+</article>
 
-<p>Back-end 以 processing 為主，比較沒有花俏的輸出。</p>
-
-<ul>
-<li><a href="https://github.com/tenderlove/mechanize">mechanize</a>：爬蟲，抓網頁很強大，可以指定 referer 來抓一些可能會被檔的網頁。</li>
-<li><a href="https://github.com/tenderlove/nokogiri">nokogiri</a>：html / xml 分析器，能透過 xpath 或 css selector 輕鬆取代修改文件。</li>
-<li><a href="https://github.com/cardinalblue/rest-core">rest-core</a>：和社群網站 api 串接的工具。</li>
-</ul>
-
-
-<h2>開始做夢</h2>
-
-<h3>octomachine</h3>
-
-<p>第一組上場的候選人是 octopress / mechanize ，他們的結晶是 octomachine ！女士們，先生們，你可曾偷別人的文章發表過？有了 octomachine 你不需要辛苦的手動盜文了！ 它會自動定時地去您指定的網站檢查是否有更新，再自動偷文轉貼到您的 octopress 部落格上！</p>
-
-<h3>octogiri</h3>
-
-<p>第二組，octopress / nokogiri ，合稱 octogiri 。可以幫助你分析你的部落格文章用了多少字，多少 html 標籤等等。</p>
-
-<h3>octorest</h3>
-
-<p>第三組 octopress / rest-core 的 octorest 則是讓你的部落格文章可以一鍵發送到各個社群媒體（ Facebook, Twitter, plurk … oh, and google+ ）</p>
-
-<h3>showmachine</h3>
-
-<p>第四組由 showoff / mechanize 組成的 showmachine 是一個即時將指定的部落格轉成投影片的工具，讓您可以隨時介紹自己的部落格(？)</p>
-
-<h3>showgirl</h3>
-
-<p>  第五組， showoff / octogiri 帶來了 showgirl (我沒拼錯，比較喜歡這樣叫～) ，網頁分析報表軟體。以投影片的方式報告網頁有哪些壞連結，有哪些不符合規範的標籤。</p>
-
-<h3>show-rest</h3>
-
-<p>  最後一組， showoff / rest-core ， show-rest ！這可厲害了，可以把你所有的社群訊息轉成投影片，你不需要一一瀏覽不同網站，只要連到你的投影片網址，最新的動態就一張一張地呈現給你看！如果你是宅到爆表的魔人，你絕對要試試這個！</p>
-
-<h2>More?</h2>
-
-<p>  Front-end 和 Back-end gems 未必要各取其一，也可以都是 Front-end 或都是 Back-end，甚至更多。偶爾來些 gems 的腦力激盪，也是蠻不錯的遊戲。說不定，你的下一個產品就是從這種激盪中生出來的。</p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Dale Ma</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-09T08:43:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/04/09/mix-gem/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/04/09/mix-gem/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/04/04/heartbeat/" title="Previous Post: Heartbeat Install Guide">&laquo; Heartbeat Install Guide</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/04/18/text-extract/" title="Next Post: 文字萃取機">文字萃取機 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>
