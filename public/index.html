@@ -9,7 +9,7 @@
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="You want to hide your scroll bar, but you still want to keep the scrolling ability. Then you&#8217;re gonna need an invisible scroll bar, this &hellip;">
+  <meta name="description" content="最近把勝間和代的 “新。知識生產術” 拿出來重翻，頗有領悟，決定記錄下自己的體會與想法。 Google 化 列出主題，隨時進行不同的關鍵字搜尋，主題應該具體些。此法可以透過不同面向觀察事物，甚而從中發掘新的搜尋目標。 Give 5 法則 分享才能讓知識深化，甚而獲得意外回響，可以透過寫部落格、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/18/knowledge-generating-method/">知識生產術</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T22:04:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近把勝間和代的 “新。知識生產術” 拿出來重翻，頗有領悟，決定記錄下自己的體會與想法。</p>
+
+<h2>Google 化</h2>
+
+<p>列出主題，隨時進行不同的關鍵字搜尋，主題應該具體些。此法可以透過不同面向觀察事物，甚而從中發掘新的搜尋目標。</p>
+
+<h2>Give 5 法則</h2>
+
+<p>分享才能讓知識深化，甚而獲得意外回響，可以透過寫部落格、聊天達成。（至於為何叫 Give &amp; Give &amp; Give &amp; Give &amp; Give，可能是作者為了強調施予才能獲得報酬吧）</p>
+
+<h2>雙軌並行法則</h2>
+
+<p>各種資訊一定要有備份，除了確保重要資訊不遺失外，臨時要搜尋也有兩個地方可以找。對於這點我頗有心得，因為有使用 Evernote 的習慣，我會把所有 note mail 一份至 Gmail。 另外有使用本機郵件軟體(Sparrow)， Gmail 的信件會有一份存在本機。pdf 等文件存在 Dropbox 和本機上。</p>
+
+<p>資訊整理的工具很多，應該多多嘗試，留下對自己最有用的部分。將不同的工具組合，可能會產生意想不到的效用。作者認為資訊即金錢，能在有限時間內，將盡可能多的有用資訊內化，是爬向資訊時代金字塔的祕技。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -943,115 +993,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/12/railsmail/">Rails 3 如何寄 Gmail</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-12T17:39:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
-
-<h2>前置作業</h2>
-
-<ul>
-<li>一個 gmail 帳號</li>
-</ul>
-
-
-<h2>步驟</h2>
-
-<h3>撰寫設定檔</h3>
-
-<p>在 YOUR_PROJECT/config/initializers 下建立 setup_mail.rb 的文件。</p>
-
-<p>setup_mail.rb</p>
-
-<pre><code>ActionMailer::Base.smtp_settings = {
-  :address              =&gt; "smtp.gmail.com",
-  :port                 =&gt; 587,
-  :domain               =&gt; "YOURDOMAIN.com",
-  :user_name            =&gt; "YOUR_GMAIL_ACC",
-  :password             =&gt; "YOUR_GMAIL_PWD",
-  :authentication       =&gt; "plain",
-  :enable_starttls_auto =&gt; true
-}
-</code></pre>
-
-<h3>建立 mailer</h3>
-
-<pre><code>rails g mailer my_mailer
-</code></pre>
-
-<p>將會在你的 app/mailers 下建立一個 my_mailer.rb。</p>
-
-<p>my_mailer.rb初始會長這樣</p>
-
-<pre><code>class MyMailer &lt; ActionMailer::Base
-  default :from =&gt; "from@example.com"
-end
-</code></pre>
-
-<p>改成</p>
-
-<pre><code>class MyMailer &lt; ActionMailer::Base
-  def send_mail
-    mail(:to =&gt; "YOUR_CLIENT@gmail.com", :subject =&gt; "Bonjour", :from =&gt; "YOUR_GMAIL@gmail.com")
-  end
-end
-</code></pre>
-
-<h3>撰寫郵件內容</h3>
-
-<p>/app/views/my_mailer 下新增 send_mail.text.erb</p>
-
-<p>send_mail.text.erb</p>
-
-<pre><code>Hello world!
-</code></pre>
-
-<h3>呼叫寄信函式</h3>
-
-<p>你已經設定完所有要寄信的部分了，接著在要寄信的 Controller 裡 call <code>MyMailer.send_mail.deliver</code> 即可</p>
-
-<p>xxx_controller.rb</p>
-
-<pre><code>def welcome
-  MyMailer.send_mail.deliver
-end
-</code></pre>
-
-<h3>進階</h3>
-
-<p>設定好寄信功能在 rails 3 裡很省事，其它進階的功能項增加附件之類的也不困難，可以參考 <a href="http://asciicasts.com/episodes/206-action-mailer-in-rails-3">Ascii casts</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1065,6 +1006,10 @@ end
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/18/knowledge-generating-method/">知識生產術</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/06/invisible-scrollbar/">Invisible scrollbar</a>
@@ -1100,10 +1045,6 @@ end
     
       <li class="post">
         <a href="/blog/2012/08/26/how-do-i-train-my-rails-skill/">How do I train my rails skill?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/06/deploy-static-site-on-heroku/">Deploy static site on heroku</a>
       </li>
     
   </ul>

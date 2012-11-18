@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>玩網路金流絕不能不知的 PayPal IPN - Dale Ma</title>
+  <title>知識生產術 - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。 IPN 是什麼？ 當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 POST 通知回來，這就是 IPN (Instant Payment Notification)。 實作原則 &hellip;">
+  <meta name="description" content="最近把勝間和代的 “新。知識生產術” 拿出來重翻，頗有領悟，決定記錄下自己的體會與想法。 Google 化 列出主題，隨時進行不同的關鍵字搜尋，主題應該具體些。此法可以透過不同面向觀察事物，甚而從中發掘新的搜尋目標。 Give 5 法則 分享才能讓知識深化，甚而獲得意外回響，可以透過寫部落格、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/11/18/knowledge-generating-method">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">玩網路金流絕不能不知的 PayPal IPN</h1>
+      <h1 class="entry-title">知識生產術</h1>
     
     
       <p class="meta">
@@ -96,43 +96,28 @@
   
 
 
-<time datetime="2012-10-29T08:05:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2012-11-18T22:04:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。</p>
+<div class="entry-content"><p>最近把勝間和代的 “新。知識生產術” 拿出來重翻，頗有領悟，決定記錄下自己的體會與想法。</p>
 
-<h2>IPN 是什麼？</h2>
+<h2>Google 化</h2>
 
-<p>當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 <code>POST</code> 通知回來，這就是 IPN (Instant Payment Notification)。</p>
+<p>列出主題，隨時進行不同的關鍵字搜尋，主題應該具體些。此法可以透過不同面向觀察事物，甚而從中發掘新的搜尋目標。</p>
 
-<h2>實作原則</h2>
+<h2>Give 5 法則</h2>
 
-<p>IPN 驗證分為這些步驟：</p>
+<p>分享才能讓知識深化，甚而獲得意外回響，可以透過寫部落格、聊天達成。（至於為何叫 Give &amp; Give &amp; Give &amp; Give &amp; Give，可能是作者為了強調施予才能獲得報酬吧）</p>
 
-<ol>
-<li>API / button 引導使用者在 PayPal 完成結帳。</li>
-<li>PayPal <code>POST</code> 一串包含使用者與賣家資訊的訊息。</li>
-<li>賣家 server 檢查完這串訊息無誤後，原封不動的 <code>POST</code> 回 PayPal。</li>
-<li>PayPal 確認賣家回傳的訊息無誤後，<code>POST</code> 一個 <code>VERIFIED</code> 或 <code>INVALID</code> 的字串。</li>
-</ol>
+<h2>雙軌並行法則</h2>
 
+<p>各種資訊一定要有備份，除了確保重要資訊不遺失外，臨時要搜尋也有兩個地方可以找。對於這點我頗有心得，因為有使用 Evernote 的習慣，我會把所有 note mail 一份至 Gmail。 另外有使用本機郵件軟體(Sparrow)， Gmail 的信件會有一份存在本機。pdf 等文件存在 Dropbox 和本機上。</p>
 
-<p>關鍵在於要檢查 <code>2.</code> 裡面的訊息，避免商業詐欺。以下是必須檢查的項目：</p>
-
-<ol>
-<li><code>receiver_email</code> = gm_1231902686_biz@paypal.com 確認是賣家自己的 mail。</li>
-<li><code>txn_id</code> = 61E67681CH3238416 這代表交易編號，有時候 PayPal會回傳兩個相同的交易編號，這時要避免重覆在賣家的 server 上認證，避免連續賣出兩次商品。</li>
-<li><code>payment_status</code> = Completed 代表付款完成，可別讓人沒付完錢就送出產品 / 服務了。</li>
-</ol>
-
-
-<h2>參考資料</h2>
-
-<p><a href="http://bit.ly/TodWRL">PayPal IPN 官方文件</a></p>
+<p>資訊整理的工具很多，應該多多嘗試，留下對自己最有用的部分。將不同的工具組合，可能會產生意想不到的效用。作者認為資訊即金錢，能在有限時間內，將盡可能多的有用資訊內化，是爬向資訊時代金字塔的祕技。</p>
 </div>
 
 
@@ -155,7 +140,7 @@
   
 
 
-<time datetime="2012-10-29T08:05:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2012-11-18T22:04:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
       
 
 
@@ -163,7 +148,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/11/18/knowledge-generating-method/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/11/18/knowledge-generating-method/" >Tweet</a>
   
   
   
@@ -172,10 +157,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/28/light-life/" title="Previous Post: 松浦彌太郎的輕生活練習">&laquo; 松浦彌太郎的輕生活練習</a>
+        <a class="basic-alignment left" href="/blog/2012/11/06/invisible-scrollbar/" title="Previous Post: Invisible scrollbar">&laquo; Invisible scrollbar</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/11/06/invisible-scrollbar/" title="Next Post: Invisible scrollbar">Invisible scrollbar &raquo;</a>
       
     </p>
   </footer>
