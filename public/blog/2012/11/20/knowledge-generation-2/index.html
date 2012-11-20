@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>文字萃取機 - Dale Ma</title>
+  <title>知識生產術（二）- 辨別資訊洪流中 1% 本質的技術 - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="什麼是文字萃取？ 我們每天都要瀏覽很多網頁，每張網頁所含的內容其實有2成以上不是我們在乎的。所以開始有人想把重要的內容從網頁中萃取出來，也就是所謂的 text extracting 。文字萃取有很多方法，其中我比較感興趣的只有兩種，阿基米德法和模擬城市法。（對，名字是我亂取的。） 阿基米德法 &hellip;">
+  <meta name="description" content="我們每天可以接觸到大量資訊，其中只有 1% ~ 10% 對我們是真正有用的，勝間和代提出了一些獨特的見解方法來協助辨別這些有用的資訊。 共有 6 個面向，前三個是抽象的觀念，後三個是實務的做法。 架構力 透過架構力，把資訊的骨幹抓出來，汰除累贅的部分，可以加深印象。有系統的將資訊分門別類，需要練習 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/04/18/text-extract">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/11/20/knowledge-generation-2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">文字萃取機</h1>
+      <h1 class="entry-title">知識生產術（二）- 辨別資訊洪流中 1% 本質的技術</h1>
     
     
       <p class="meta">
@@ -96,77 +96,40 @@
   
 
 
-<time datetime="2012-04-18T22:01:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
+<time datetime="2012-11-20T20:31:00+08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>什麼是文字萃取？</h2>
+<div class="entry-content"><p>我們每天可以接觸到大量資訊，其中只有 1% ~ 10% 對我們是真正有用的，勝間和代提出了一些獨特的見解方法來協助辨別這些有用的資訊。</p>
 
-<p>我們每天都要瀏覽很多網頁，每張網頁所含的內容其實有2成以上不是我們在乎的。所以開始有人想把重要的內容從網頁中萃取出來，也就是所謂的 text extracting 。文字萃取有很多方法，其中我比較感興趣的只有兩種，阿基米德法和模擬城市法。（對，名字是我亂取的。）</p>
+<p>共有 6 個面向，前三個是抽象的觀念，後三個是實務的做法。</p>
 
-<h2>阿基米德法</h2>
+<h2>架構力</h2>
 
-<p>html 是以 tag 所組成的，將每行 html 所含的文字除上 tag 數，每行可以得到一個比值，再把比值較輕的tag移除（文字含量較少）。跟阿基米德以比重來測量皇冠的真假原理一樣。</p>
+<p>透過架構力，把資訊的骨幹抓出來，汰除累贅的部分，可以加深印象。有系統的將資訊分門別類，需要練習，可以先從覺得整理不錯的文章開始學習。</p>
 
-<p><img src="http://tomazkovacic.com/blog/wp-content/uploads/2011/03/random17-300x166.png" alt="" /></p>
+<h2>智慧力</h2>
 
-<p>這是以行數為 x 軸，以比重為 y 軸所得到的對應圖。至於怎樣的數值才算最好，那就真的是一門學問了，每張網頁內容都不盡相同，一不小心就會刪掉太多或是保留太多。</p>
+<p>擁有整理架構的能力，還需要足夠的經驗，從資訊中歸納出結論，甚而激發出新的構想。作者將這稱為智慧力。</p>
 
-<h2>模擬城市法</h2>
+<h2>失敗力</h2>
 
-<p>這是將所有 tags 的實際位置算出來，擷取位在中間的區塊。這方法實作上稍難，遇上複雜的網頁結構也會不容易判斷。</p>
+<p>透過失敗得到新的啟發。未必一定是事情搞砸才算失敗，將原本手續繁雜費時的事物處理步驟優化也是一種失敗力。譬如每天減少自己的做同樣工作時間，但卻又能產出一樣甚至更好結果的能力。</p>
 
-<p><img src="http://tomazkovacic.com/blog/wp-content/uploads/2011/03/VIPS-300x270.jpg" alt="" /></p>
+<h2>共享最佳實務做法</h2>
 
-<h2>以 Ruby 開發的文字萃取 gem</h2>
+<p>又稱標竿學習，在找到某領域上的最佳實務做法前，不妨先參考別人的最佳實務做法。</p>
 
-<ul>
-<li><a href="https://github.com/iterationlabs/ruby-readability">ruby-readability</a></li>
-<li><a href="https://github.com/eguitarz/juice">juice</a></li>
-</ul>
+<h2>捨棄無法發揮自己價值的部分</h2>
 
+<p>別硬是鑽研沒興趣的知識，或是未來使用機率不高的資訊。</p>
 
-<p>兩種都是以阿基米德法為基礎所發展，個人偏好 Juice ，因為它可以取出比較完整的內容，據說 juice 的作者是因為不滿意前者的精準度而開發的。（謠言可信度很高，因為我就是作者）</p>
+<h2>讀書、讀書、讀書</h2>
 
-<h2>Juice</h2>
-
-<p>Juice 的演算法不算複雜：</p>
-
-<ol>
-<li><p>先濾掉明顯不會是內文的 HTML tags 。例如： &lt;menu>&lt;/menu>, &lt;div class=&#8221;comment&#8221;>&lt;/div>, &lt;footer>&lt;/footer></p></li>
-<li><p>接著選出 html 樹狀圖中內文較多的分支，把其他分支剔除。</p></li>
-<li><p>最後，把選到的分支裡的每個 tag 所含的文字比重拿來算分，低於一定比值的就自動刪掉。</p></li>
-</ol>
-
-
-<p>juice 的 API 十分簡單：</p>
-
-<pre><code>juice = Juice.new(url)
-juice.extract
-
-puts juice.title
-puts juice.content
-</code></pre>
-
-<p>不過目前還是有些網頁編碼會出問題 ，但根源是來自於 nokogiri 沒有處理好，讓作者十分苦惱。</p>
-
-<h3>更強的 Juice ？</h3>
-
-<p>作者正打算透過 Machine Learning 讓 Juice可以有更精準更強大的截取演算法，亦即自動從資料庫中選網頁，萃取後和預期結果比對，如果相似度在一定比例內的話就固定目前的參數，差太遠就微調參數重做，直到找到最佳解為止。</p>
-
-<p>每個無法截取理想內容的網站也會建立 profile ，juice 讀取時會透過專門的參數來讀取這些網站。</p>
-
-<p>聽起來就不是一兩天可以做完的事，也許你能幫作者一臂之力？</p>
-
-<h2>Reference</h2>
-
-<ul>
-<li><a href="http://tomazkovacic.com/blog/14/extracting-article-text-from-html-documents/">Overview: Extracting article text from HTML documents | My tech blog.</a></li>
-</ul>
-
+<p>作者認為書的資訊優良度最高，要比網路上未經處理的雜訊要好。她每月花 15 萬日圓買書，大多的書都與價格呈正比，精裝 > 軟皮 > 隨行本，所以請不要猶豫買貴的書。同時她重視閱讀速度，有了閱讀速度，可以快速的透過目錄架構知道這本書該不該買，也可以快速大量閱讀書籍。</p>
 </div>
 
 
@@ -189,21 +152,15 @@ puts juice.content
   
 
 
-<time datetime="2012-04-18T22:01:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
+<time datetime="2012-11-20T20:31:00+08:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>, <a class='category' href='/blog/categories/ideas/'>ideas</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/04/18/text-extract/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/04/18/text-extract/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/11/20/knowledge-generation-2/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/11/20/knowledge-generation-2/" >Tweet</a>
   
   
   
@@ -212,10 +169,8 @@ puts juice.content
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/09/mix-gem/" title="Previous Post: Gems 混搭空想">&laquo; Gems 混搭空想</a>
+        <a class="basic-alignment left" href="/blog/2012/11/18/knowledge-generating-method/" title="Previous Post: 知識生產術（一） - Google 化">&laquo; 知識生產術（一） - Google 化</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/29/image-injection/" title="Next Post: Image injection 輕鬆檢查身份認證">Image injection 輕鬆檢查身份認證 &raquo;</a>
       
     </p>
   </footer>

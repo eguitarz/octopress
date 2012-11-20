@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "知識生產術"
+title: "知識生產術（一） - Google 化"
 date: 2012-11-18 22:04
 comments: true
 categories: 

@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2012-11-18T22:09:38+08:00</updated>
+  <updated>2012-11-20T20:33:29+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -14,7 +14,42 @@
 
   
   <entry>
-    <title type="html"><![CDATA[知識生產術]]></title>
+    <title type="html"><![CDATA[知識生產術（二）- 辨別資訊洪流中 1% 本質的技術]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2012/11/20/knowledge-generation-2/"/>
+    <updated>2012-11-20T20:31:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2012/11/20/knowledge-generation-2</id>
+    <content type="html"><![CDATA[<p>我們每天可以接觸到大量資訊，其中只有 1% ~ 10% 對我們是真正有用的，勝間和代提出了一些獨特的見解方法來協助辨別這些有用的資訊。</p>
+
+<p>共有 6 個面向，前三個是抽象的觀念，後三個是實務的做法。</p>
+
+<h2>架構力</h2>
+
+<p>透過架構力，把資訊的骨幹抓出來，汰除累贅的部分，可以加深印象。有系統的將資訊分門別類，需要練習，可以先從覺得整理不錯的文章開始學習。</p>
+
+<h2>智慧力</h2>
+
+<p>擁有整理架構的能力，還需要足夠的經驗，從資訊中歸納出結論，甚而激發出新的構想。作者將這稱為智慧力。</p>
+
+<h2>失敗力</h2>
+
+<p>透過失敗得到新的啟發。未必一定是事情搞砸才算失敗，將原本手續繁雜費時的事物處理步驟優化也是一種失敗力。譬如每天減少自己的做同樣工作時間，但卻又能產出一樣甚至更好結果的能力。</p>
+
+<h2>共享最佳實務做法</h2>
+
+<p>又稱標竿學習，在找到某領域上的最佳實務做法前，不妨先參考別人的最佳實務做法。</p>
+
+<h2>捨棄無法發揮自己價值的部分</h2>
+
+<p>別硬是鑽研沒興趣的知識，或是未來使用機率不高的資訊。</p>
+
+<h2>讀書、讀書、讀書</h2>
+
+<p>作者認為書的資訊優良度最高，要比網路上未經處理的雜訊要好。她每月花 15 萬日圓買書，大多的書都與價格呈正比，精裝 > 軟皮 > 隨行本，所以請不要猶豫買貴的書。同時她重視閱讀速度，有了閱讀速度，可以快速的透過目錄架構知道這本書該不該買，也可以快速大量閱讀書籍。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[知識生產術（一） - Google 化]]></title>
     <link href="http://dale-ma.heroku.com/blog/2012/11/18/knowledge-generating-method/"/>
     <updated>2012-11-18T22:04:00+08:00</updated>
     <id>http://dale-ma.heroku.com/blog/2012/11/18/knowledge-generating-method</id>
@@ -774,70 +809,6 @@ puts juice.content
 <li><a href="http://tomazkovacic.com/blog/14/extracting-article-text-from-html-documents/">Overview: Extracting article text from HTML documents | My tech blog.</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gems 混搭空想]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/04/09/mix-gem/"/>
-    <updated>2012-04-09T08:43:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/04/09/mix-gem</id>
-    <content type="html"><![CDATA[<h2>空想所根據的規則</h2>
-
-<p>Ruby 的 Gems 五花八門，其中不乏很多有特色的 Gems 。常常在想是不是有可能利用這些 Gems 搭出有趣但不一定要實用的服務呢？</p>
-
-<p>大致上， Gems 可以分為 Front-end 和 Back-end 以及 Mixed ，我混搭的第一步就是先搜集一些有趣的Gems，然後再隨機的組合。基本上是從 Front-end 和 Back-end 裡面各抽出一個候選人，接著想想搭在一起會變成什麼玩意。當然，搭出來的可能是狗屁不通的結果，但是，一切都以好玩為出發點。</p>
-
-<h2>Front-end gems</h2>
-
-<p>Front-end 比較偏向內容的呈現，可能是輸出圖形，也可能是輸出文字或是兩者。</p>
-
-<ul>
-<li><a href="https://github.com/imathis/octopress">octopress</a>：知名的部落格架站系統</li>
-<li><a href="https://github.com/schacon/showoff">showoff</a>：web 介面的投影片</li>
-</ul>
-
-
-<h2>Back-end gems</h2>
-
-<p>Back-end 以 processing 為主，比較沒有花俏的輸出。</p>
-
-<ul>
-<li><a href="https://github.com/tenderlove/mechanize">mechanize</a>：爬蟲，抓網頁很強大，可以指定 referer 來抓一些可能會被檔的網頁。</li>
-<li><a href="https://github.com/tenderlove/nokogiri">nokogiri</a>：html / xml 分析器，能透過 xpath 或 css selector 輕鬆取代修改文件。</li>
-<li><a href="https://github.com/cardinalblue/rest-core">rest-core</a>：和社群網站 api 串接的工具。</li>
-</ul>
-
-
-<h2>開始做夢</h2>
-
-<h3>octomachine</h3>
-
-<p>第一組上場的候選人是 octopress / mechanize ，他們的結晶是 octomachine ！女士們，先生們，你可曾偷別人的文章發表過？有了 octomachine 你不需要辛苦的手動盜文了！ 它會自動定時地去您指定的網站檢查是否有更新，再自動偷文轉貼到您的 octopress 部落格上！</p>
-
-<h3>octogiri</h3>
-
-<p>第二組，octopress / nokogiri ，合稱 octogiri 。可以幫助你分析你的部落格文章用了多少字，多少 html 標籤等等。</p>
-
-<h3>octorest</h3>
-
-<p>第三組 octopress / rest-core 的 octorest 則是讓你的部落格文章可以一鍵發送到各個社群媒體（ Facebook, Twitter, plurk … oh, and google+ ）</p>
-
-<h3>showmachine</h3>
-
-<p>第四組由 showoff / mechanize 組成的 showmachine 是一個即時將指定的部落格轉成投影片的工具，讓您可以隨時介紹自己的部落格(？)</p>
-
-<h3>showgirl</h3>
-
-<p>  第五組， showoff / octogiri 帶來了 showgirl (我沒拼錯，比較喜歡這樣叫～) ，網頁分析報表軟體。以投影片的方式報告網頁有哪些壞連結，有哪些不符合規範的標籤。</p>
-
-<h3>show-rest</h3>
-
-<p>  最後一組， showoff / rest-core ， show-rest ！這可厲害了，可以把你所有的社群訊息轉成投影片，你不需要一一瀏覽不同網站，只要連到你的投影片網址，最新的動態就一張一張地呈現給你看！如果你是宅到爆表的魔人，你絕對要試試這個！</p>
-
-<h2>More?</h2>
-
-<p>  Front-end 和 Back-end gems 未必要各取其一，也可以都是 Front-end 或都是 Back-end，甚至更多。偶爾來些 gems 的腦力激盪，也是蠻不錯的遊戲。說不定，你的下一個產品就是從這種激盪中生出來的。</p>
 ]]></content>
   </entry>
   
