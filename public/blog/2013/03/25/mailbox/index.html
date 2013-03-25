@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>玩網路金流絕不能不知的 PayPal IPN - Dale Ma</title>
+  <title>Mailbox - Dale Ma</title>
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。 IPN 是什麼？ 當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 POST 通知回來，這就是 IPN (Instant Payment Notification)。 實作原則 &hellip;">
+  <meta name="description" content="Mailbox，一個 2013 年快速竄紅的手機信箱 App，上架首周即達成 15 萬人註冊下載，並於三個月內由 Dropbox 以傳聞 1 億美金買下。很囂張的軟體，但這不是背後製作團隊的第一個作品。 Mailbox 的前身是 Orchestra，一個手機 to-do list。 to-do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn">
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2013/03/25/mailbox">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">玩網路金流絕不能不知的 PayPal IPN</h1>
+      <h1 class="entry-title">Mailbox</h1>
     
     
       <p class="meta">
@@ -96,43 +96,40 @@
   
 
 
-<time datetime="2012-10-29T08:05:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2013-03-25T21:54:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>PayPal 是個以安全著稱的金流服務商。 PayPal 的 IPN 也不是隨便就能搞定的通知協定。</p>
+<div class="entry-content"><p>Mailbox，一個 2013 年快速竄紅的手機信箱 App，上架首周即達成 15 萬人註冊下載，並於三個月內由 Dropbox 以傳聞 1 億美金買下。很囂張的軟體，但這不是背後製作團隊的第一個作品。</p>
 
-<h2>IPN 是什麼？</h2>
+<p>Mailbox 的前身是 Orchestra，一個手機 to-do list。 to-do list 軟體多到比大學生還多， 以 to-do list 為概念的信箱整理技巧也不是第一天聽聞，為何 Mailbox 能贏得那麼多人的眼球？</p>
 
-<p>當使用者透過你的網站在 PayPal 結帳完成時， PayPal 會 <code>POST</code> 通知回來，這就是 IPN (Instant Payment Notification)。</p>
+<h3>行銷</h3>
 
-<h2>實作原則</h2>
+<p>Mailbox 極富盛名的預約排隊系統是幕後功臣之一。沒人喜歡排隊，所以儘可能不要讓使用者等待… 錯！端看於你能給使用者什麼樣的等待體驗，如果能讓使用者介於喪失耐心與渴望間取得平衡，等待還是有它存在的價值。</p>
 
-<p>IPN 驗證分為這些步驟：</p>
+<p>Mailbox 的排隊系統可以顯示你目前排到第幾號，這很平常。但除此之外，也可以顯示有幾個 loser 排在你之後。讓人有種優越感，進而激起期待產品到手的那股衝動。</p>
 
-<ol>
-<li>API / button 引導使用者在 PayPal 完成結帳。</li>
-<li>PayPal <code>POST</code> 一串包含使用者與賣家資訊的訊息。</li>
-<li>賣家 server 檢查完這串訊息無誤後，原封不動的 <code>POST</code> 回 PayPal。</li>
-<li>PayPal 確認賣家回傳的訊息無誤後，<code>POST</code> 一個 <code>VERIFIED</code> 或 <code>INVALID</code> 的字串。</li>
-</ol>
+<p>這種新穎的排隊方式激起了很多話題，也成了一種病毒式行銷手法。很多人根本不知道實際產品長怎樣，只是衝著排隊而來，非、常、誇、張。</p>
 
+<h3>介面</h3>
 
-<p>關鍵在於要檢查 <code>2.</code> 裡面的訊息，避免商業詐欺。以下是必須檢查的項目：</p>
+<p>Mailbox 的設計很簡單樸實，沒有花俏的圖案，沒有誇張的視覺效果，最近受歡迎的 App 幾乎都是走同樣的路。</p>
 
-<ol>
-<li><code>receiver_email</code> = gm_1231902686_biz@paypal.com 確認是賣家自己的 mail。</li>
-<li><code>txn_id</code> = 61E67681CH3238416 這代表交易編號，有時候 PayPal會回傳兩個相同的交易編號，這時要避免重覆在賣家的 server 上認證，避免連續賣出兩次商品。</li>
-<li><code>payment_status</code> = Completed 代表付款完成，可別讓人沒付完錢就送出產品 / 服務了。</li>
-</ol>
+<p>主要選單的設計和 Facebook 一樣是從左邊滑出，而非彈跳式視窗，避免視覺連貫性中斷。</p>
 
+<p>主要功能列只有 Inbox, Later, Finished, 和 Compose，最常使用的就是在 Inbox 內看信，所以預設的 View 是 Inbox。每個 View 之間切換也採用滑動式處理，完全沒有突兀的彈跳視窗。</p>
 
-<h2>參考資料</h2>
+<h3>使用者體驗</h3>
 
-<p><a href="http://bit.ly/TodWRL">PayPal IPN 官方文件</a></p>
+<p>透過滑動來處理每條 mail 要進入 Later 或 Finished 資料夾，還貼心的預設稍晚處理、明天處理、下週處理的快捷鍵。整個體驗流程很順暢，就連滑動手勢的長短也有相應的功能。我喜歡這種一指走天下的作風，可以一手插口袋一手處理事情的帥氣軟體(要搭配西裝)。</p>
+
+<h3>-</h3>
+
+<p>還沒申請的話可以透過 App Store 下載 Mailbox 的軟體來排隊等開通，歡迎加入排隊地獄。</p>
 </div>
 
 
@@ -155,7 +152,7 @@
   
 
 
-<time datetime="2012-10-29T08:05:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2013-03-25T21:54:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2013</time>
       
 
 
@@ -163,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2012/10/29/paypal-ipn/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2013/03/25/mailbox/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2013/03/25/mailbox/" >Tweet</a>
   
   
   
@@ -172,10 +169,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/28/light-life/" title="Previous Post: 松浦彌太郎的輕生活練習">&laquo; 松浦彌太郎的輕生活練習</a>
+        <a class="basic-alignment left" href="/blog/2013/02/23/half-drunk-life/" title="Previous Post: 半醉人生">&laquo; 半醉人生</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/11/06/invisible-scrollbar/" title="Next Post: Invisible scrollbar">Invisible scrollbar &raquo;</a>
       
     </p>
   </footer>

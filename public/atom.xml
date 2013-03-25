@@ -4,7 +4,7 @@
   <title><![CDATA[Dale Ma]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2013-02-23T15:59:21+08:00</updated>
+  <updated>2013-03-25T22:49:21+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mailbox]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2013/03/25/mailbox/"/>
+    <updated>2013-03-25T21:54:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2013/03/25/mailbox</id>
+    <content type="html"><![CDATA[<p>Mailbox，一個 2013 年快速竄紅的手機信箱 App，上架首周即達成 15 萬人註冊下載，並於三個月內由 Dropbox 以傳聞 1 億美金買下。很囂張的軟體，但這不是背後製作團隊的第一個作品。</p>
+
+<p>Mailbox 的前身是 Orchestra，一個手機 to-do list。 to-do list 軟體多到比大學生還多， 以 to-do list 為概念的信箱整理技巧也不是第一天聽聞，為何 Mailbox 能贏得那麼多人的眼球？</p>
+
+<h3>行銷</h3>
+
+<p>Mailbox 極富盛名的預約排隊系統是幕後功臣之一。沒人喜歡排隊，所以儘可能不要讓使用者等待… 錯！端看於你能給使用者什麼樣的等待體驗，如果能讓使用者介於喪失耐心與渴望間取得平衡，等待還是有它存在的價值。</p>
+
+<p>Mailbox 的排隊系統可以顯示你目前排到第幾號，這很平常。但除此之外，也可以顯示有幾個 loser 排在你之後。讓人有種優越感，進而激起期待產品到手的那股衝動。</p>
+
+<p>這種新穎的排隊方式激起了很多話題，也成了一種病毒式行銷手法。很多人根本不知道實際產品長怎樣，只是衝著排隊而來，非、常、誇、張。</p>
+
+<h3>介面</h3>
+
+<p>Mailbox 的設計很簡單樸實，沒有花俏的圖案，沒有誇張的視覺效果，最近受歡迎的 App 幾乎都是走同樣的路。</p>
+
+<p>主要選單的設計和 Facebook 一樣是從左邊滑出，而非彈跳式視窗，避免視覺連貫性中斷。</p>
+
+<p>主要功能列只有 Inbox, Later, Finished, 和 Compose，最常使用的就是在 Inbox 內看信，所以預設的 View 是 Inbox。每個 View 之間切換也採用滑動式處理，完全沒有突兀的彈跳視窗。</p>
+
+<h3>使用者體驗</h3>
+
+<p>透過滑動來處理每條 mail 要進入 Later 或 Finished 資料夾，還貼心的預設稍晚處理、明天處理、下週處理的快捷鍵。整個體驗流程很順暢，就連滑動手勢的長短也有相應的功能。我喜歡這種一指走天下的作風，可以一手插口袋一手處理事情的帥氣軟體(要搭配西裝)。</p>
+
+<h3>-</h3>
+
+<p>還沒申請的話可以透過 App Store 下載 Mailbox 的軟體來排隊等開通，歡迎加入排隊地獄。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[半醉人生]]></title>
@@ -677,42 +712,6 @@ end
 <h3>進階</h3>
 
 <p>設定好寄信功能在 rails 3 裡很省事，其它進階的功能項增加附件之類的也不困難，可以參考 <a href="http://asciicasts.com/episodes/206-action-mailer-in-rails-3">Ascii casts</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[截圖、註解，LittleSnapper]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/05/09/littlesnapper/"/>
-    <updated>2012-05-09T23:57:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/05/09/littlesnapper</id>
-    <content type="html"><![CDATA[<p><img src="http://assets3.realmacmedia.com/websites/_resources/littlesnapper/images/littlesnapper_header.jpg" alt="littlesnapper" /></p>
-
-<p>死寂的夜晚，我乘著浪板在網路上來來回回搜索，計劃着下一個私人旅行專案。瀏覽器裡的分頁隨著新的發現慢慢增加，我意識到必須要開始把有用的資訊用圖片儲存。 Mac 內建了抓圖快捷鍵，可以把截取的圖片存在桌面上。但是我常常忘記截圖的熱鍵，另外如果需要在圖上註解，我需要開啟圖片修改軟體，載入、修改存檔。一定有更好用的工具可以幫助我完成這些冗活，於是我將搜尋的目標換成截圖軟體，兀自開始下一輪的搜尋。</p>
-
-<p><img src="images/littlesnapper.png" alt="littlesnapper" /></p>
-
-<p><a href="http://www.realmacsoftware.com/littlesnapper/">LittleSnapper</a></p>
-
-<p>LittleSnapper 是我第一個找到的軟體。雖然是付費軟體，但容易上手。 它有兩項特點讓我決定用它：</p>
-
-<h2>滑鼠點擊選單即可截圖，不必再查快捷鍵</h2>
-
-<p><img src="images/littlesnapper-menu.png" alt="menu" /></p>
-
-<p>有時候我需要截取一整個視窗的圖片，有時候我需要擷取某一小區塊的圖片。 LittleSnapper 將這些功能整合在工作列的選單內，可以依需要選擇。特別的是還有類似照相機的延遲拍照，在某些特殊用途上很方便。(就像我截的這張 LittleSnapper 工作列圖示，可以先點延遲拍照，再將工作列打開。)</p>
-
-<h2>截圖可註解，不用另外開圖像程式</h2>
-
-<p>  <img src="images/littlesnapper-comment.png" alt="menu" />
-  我習慣在旅遊地圖上作註解， LittleSnapper 讓我可以輕鬆的打上註解，加上指標。還有裁切功能也很常用，可以裁切重要的部分存檔。</p>
-
-<h2>其他功能</h2>
-
-<p>  LittleSnapper 本身就是一個圖像儲存程式，你也不需要擔心去哪找圖片，需要的時候將圖片輸出即可。其他的功能包含幫你傳擋到 Web 或 FTP server上、將你的圖片按時間分類等，對常需要整理資料的人來說應該助益不小。</p>
-
-<h2>購買資訊</h2>
-
-<p>  <a href="http://www.realmacsoftware.com/littlesnapper/">LittleSnapper</a> 在 <a href="http://itunes.apple.com/us/app/littlesnapper/id403489261?mt=12&amp;ign-mpt=uo%3D4">App Store</a> 上有販賣 ( $39.99 )。</p>
 ]]></content>
   </entry>
   
