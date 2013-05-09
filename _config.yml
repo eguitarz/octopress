@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://dale-ma.heroku.com
-title: Dale Ma
-subtitle: Simple But Not Too Simple
+title: Finite Coffee
+subtitle: Javascript / Ruby / Simple / Dale Ma
 author: Dale Ma
 simple_search: http://google.com/search
 description:
@@ -58,7 +58,7 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.ht
 # ----------------------- #
 
 # Github repositories
-github_user: eguitarz
+github_user: 
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true

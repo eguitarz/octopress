@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: heroku | Dale Ma]]></title>
+  <title><![CDATA[Category: heroku | Finite Coffee]]></title>
   <link href="http://dale-ma.heroku.com/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2013-03-25T22:49:21+08:00</updated>
+  <updated>2013-05-09T23:53:23+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
