@@ -4,7 +4,7 @@
   <title><![CDATA[Finite Coffee]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2013-05-09T23:53:23+08:00</updated>
+  <updated>2013-05-11T19:41:36+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript bind method]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2013/05/11/javascript-bind-method/"/>
+    <updated>2013-05-11T17:51:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2013/05/11/javascript-bind-method</id>
+    <content type="html"><![CDATA[<p>Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function object has a method &#8220;bind&#8221;. It simplify codes and make them more beautiful.</p>
+
+<h2>Syntax</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">fun</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="err">…</span><span class="p">]]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>thisArg</code>: the &#8220;this&#8221; context to be passed into <code>fun</code></li>
+<li><code>arg1</code>, <code>arg2</code> …: additional arguments which passes to <code>fun</code>&#8217;s scope</li>
+</ul>
+
+
+<p>The purpose of <code>bind</code> is change current context easier. You don&#8217;t have to create a variable like <code>self</code> to store your context.</p>
+
+<p>All right, how does it help me killing my fat codes? Let&#8217;s look at an example.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I don&#8217;t want to write function() { … } in document ready event, since i&#8217;m calling <code>camera.shoot</code> function, it should be fed directly to event binding argument. So it becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep an eye on <code>camera.shoot</code>, there&#8217;s no <code>()</code> after it. But it&#8217;s not right, the result prints <code>shoot by undefined</code>. Since it&#8217;s &#8220;Function Call&#8221; not &#8220;Object Method&#8221;, the context became global variable, here it is <code>document</code>. To make it right, the context should be <code>camera</code> object. To solve this, I use <code>bind</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This style has three benefits:</p>
+
+<ol>
+<li>No more ugly curly braces.</li>
+<li>Make context of the binding function clearer.</li>
+<li>Separate events binding and function definition.</li>
+</ol>
+
+
+<p>For my personal opinion, I don&#8217;t really like the word <code>bind</code>, I would like to see it more common.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">by</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I love it, aren&#8217;t you?</p>
+
+<h1>Reference</h1>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind">MDN - Function.prototype.bind</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mailbox]]></title>
@@ -630,88 +764,6 @@ end
 </code></pre>
 
 <p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails 3 如何寄 gmail]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/12/railsmail/"/>
-    <updated>2012-06-12T17:39:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/12/railsmail</id>
-    <content type="html"><![CDATA[<p>設定 web 的寄信模組從以往的經驗都不是很輕鬆的事，沒想到在 Rails 3 裡可以不花太多時間就搞定。</p>
-
-<h2>前置作業</h2>
-
-<ul>
-<li>一個 gmail 帳號</li>
-</ul>
-
-
-<h2>步驟</h2>
-
-<h3>撰寫設定檔</h3>
-
-<p>在 YOUR_PROJECT/config/initializers 下建立 setup_mail.rb 的文件。</p>
-
-<p>setup_mail.rb</p>
-
-<pre><code>ActionMailer::Base.smtp_settings = {
-  :address              =&gt; "smtp.gmail.com",
-  :port                 =&gt; 587,
-  :domain               =&gt; "YOURDOMAIN.com",
-  :user_name            =&gt; "YOUR_GMAIL_ACC",
-  :password             =&gt; "YOUR_GMAIL_PWD",
-  :authentication       =&gt; "plain",
-  :enable_starttls_auto =&gt; true
-}
-</code></pre>
-
-<h3>建立 mailer</h3>
-
-<pre><code>rails g mailer my_mailer
-</code></pre>
-
-<p>將會在你的 app/mailers 下建立一個 my_mailer.rb。</p>
-
-<p>my_mailer.rb初始會長這樣</p>
-
-<pre><code>class MyMailer &lt; ActionMailer::Base
-  default :from =&gt; "from@example.com"
-end
-</code></pre>
-
-<p>改成</p>
-
-<pre><code>class MyMailer &lt; ActionMailer::Base
-  def send_mail
-    mail(:to =&gt; "YOUR_CLIENT@gmail.com", :subject =&gt; "Bonjour", :from =&gt; "YOUR_GMAIL@gmail.com")
-  end
-end
-</code></pre>
-
-<h3>撰寫郵件內容</h3>
-
-<p>/app/views/my_mailer 下新增 send_mail.text.erb</p>
-
-<p>send_mail.text.erb</p>
-
-<pre><code>Hello world!
-</code></pre>
-
-<h3>呼叫寄信函式</h3>
-
-<p>你已經設定完所有要寄信的部分了，接著在要寄信的 Controller 裡 call <code>MyMailer.send_mail.deliver</code> 即可</p>
-
-<p>xxx_controller.rb</p>
-
-<pre><code>def welcome
-  MyMailer.send_mail.deliver
-end
-</code></pre>
-
-<h3>進階</h3>
-
-<p>設定好寄信功能在 rails 3 裡很省事，其它進階的功能項增加附件之類的也不困難，可以參考 <a href="http://asciicasts.com/episodes/206-action-mailer-in-rails-3">Ascii casts</a></p>
 ]]></content>
   </entry>
   

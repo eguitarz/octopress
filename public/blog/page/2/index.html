@@ -9,7 +9,7 @@
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="Why would I build this tool? Simply speaking, I want to practice Ember.js. Many guys practicing their first app by doing th Todo list. But I wanna &hellip;">
+  <meta name="description" content="When you just want simple… on heroku Sometimes you just want to deploy a simple web which contains one or two static pages, how would you do? You don &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/06/deploy-static-site-on-heroku/">Deploy Static Site on Heroku</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-06T15:57:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>When you just want simple… on heroku</h2>
+
+<p>Sometimes you just want to deploy a simple web which contains one or two static pages, how would you do? You don&#8217;t want to build a rails project merely to serve a couple of static pages. Here&#8217;s a quick guide for you~!</p>
+
+<h2>Environment</h2>
+
+<p>You should not use cedar stack, that&#8217;s not friendly for static sites. (You need to install some gems by yourself, and do some hacks…) bamboo is a good start point.</p>
+
+<pre><code>heroku create --stack bamboo-ree-1.8.7
+</code></pre>
+
+<h2>File structure</h2>
+
+<p>You should create a public folder at root. Put your index.html and stylesheet / js / img folder into &#8220;public&#8221; folder.</p>
+
+<h2>Config</h2>
+
+<p>Last, create a simple config to tell rack middleware how to render the static files…</p>
+
+<pre><code>use Rack::Static, 
+:urls =&gt; ["/stylesheet", "/img", "/js"],
+:root =&gt; "public"
+
+run lambda { |env|
+[
+    200, 
+{
+  'Content-Type'  =&gt; 'text/html', 
+  'Cache-Control' =&gt; 'public, max-age=86400' 
+}, File.open('public/index.html', File::RDONLY)
+] 
+</code></pre>
+
+<p>Then you can commit and push the site to heroku. Here are the official guides if you still do not understand…</p>
+
+<ul>
+<li><p><a href="https://devcenter.heroku.com/articles/static-sites-on-heroku">Static Sites with Ruby on Heroku/Bamboo</a></p></li>
+<li><p><a href="https://devcenter.heroku.com/articles/bamboo">The Badious Bamboo Stack</a></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1338,6 +1413,10 @@ rake install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/25/mailbox/">Mailbox</a>
       </li>
     
@@ -1371,10 +1450,6 @@ rake install
     
       <li class="post">
         <a href="/blog/2012/10/27/first-sunshine/">From the first sun shine to the last moon light</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/11/simcity/">模擬城市，模擬創業</a>
       </li>
     
   </ul>

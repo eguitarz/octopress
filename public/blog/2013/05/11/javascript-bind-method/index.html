@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Javascript bind method - Finite Coffee</title>
+  <meta name="author" content="Dale Ma">
+
+  
+  <meta name="description" content="Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2013/05/11/javascript-bind-method">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Finite Coffee" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30309389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Finite Coffee</a></h1>
+  
+    <h2>Javascript / Ruby / Simple / Dale Ma</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dale-ma.heroku.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://aboutdale.heroku.com/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Javascript Bind Method</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-11T17:51:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function object has a method &#8220;bind&#8221;. It simplify codes and make them more beautiful.</p>
+
+<h2>Syntax</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">fun</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="err">…</span><span class="p">]]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>thisArg</code>: the &#8220;this&#8221; context to be passed into <code>fun</code></li>
+<li><code>arg1</code>, <code>arg2</code> …: additional arguments which passes to <code>fun</code>&#8217;s scope</li>
+</ul>
+
+
+<p>The purpose of <code>bind</code> is change current context easier. You don&#8217;t have to create a variable like <code>self</code> to store your context.</p>
+
+<p>All right, how does it help me killing my fat codes? Let&#8217;s look at an example.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I don&#8217;t want to write function() { … } in document ready event, since i&#8217;m calling <code>camera.shoot</code> function, it should be fed directly to event binding argument. So it becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep an eye on <code>camera.shoot</code>, there&#8217;s no <code>()</code> after it. But it&#8217;s not right, the result prints <code>shoot by undefined</code>. Since it&#8217;s &#8220;Function Call&#8221; not &#8220;Object Method&#8221;, the context became global variable, here it is <code>document</code>. To make it right, the context should be <code>camera</code> object. To solve this, I use <code>bind</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This style has three benefits:</p>
+
+<ol>
+<li>No more ugly curly braces.</li>
+<li>Make context of the binding function clearer.</li>
+<li>Separate events binding and function definition.</li>
+</ol>
+
+
+<p>For my personal opinion, I don&#8217;t really like the word <code>bind</code>, I would like to see it more common.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">by</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I love it, aren&#8217;t you?</p>
+
+<h1>Reference</h1>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind">MDN - Function.prototype.bind</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dale Ma</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-11T17:51:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2013/05/11/javascript-bind-method/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2013/05/11/javascript-bind-method/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/25/mailbox/" title="Previous Post: Mailbox">&laquo; Mailbox</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/25/mailbox/">Mailbox</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/23/half-drunk-life/">半醉人生</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/23/blink/">Blink 決斷 2 秒間</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/knowledge-generation-2/">知識生產術（二）- 辨別資訊洪流中 1% 本質的技術</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/18/knowledge-generating-method/">知識生產術（一） - Google 化</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/invisible-scrollbar/">Invisible scrollbar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/29/paypal-ipn/">玩網路金流絕不能不知的 PayPal IPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/28/light-life/">松浦彌太郎的輕生活練習</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/27/first-sunshine/">From the first sun shine to the last moon light</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("eguitarz", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/eguitarz" class="twitter-follow-button" data-show-count="false">Follow @eguitarz</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Dale Ma -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

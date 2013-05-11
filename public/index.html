@@ -9,7 +9,7 @@
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="Mailbox，一個 2013 年快速竄紅的手機信箱 App，上架首周即達成 15 萬人註冊下載，並於三個月內由 Dropbox 以傳聞 1 億美金買下。很囂張的軟體，但這不是背後製作團隊的第一個作品。 Mailbox 的前身是 Orchestra，一個手機 to-do list。 to-do &hellip;">
+  <meta name="description" content="Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,167 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/11/javascript-bind-method/">Javascript Bind Method</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-11T17:51:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function object has a method &#8220;bind&#8221;. It simplify codes and make them more beautiful.</p>
+
+<h2>Syntax</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">fun</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="err">…</span><span class="p">]]])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>thisArg</code>: the &#8220;this&#8221; context to be passed into <code>fun</code></li>
+<li><code>arg1</code>, <code>arg2</code> …: additional arguments which passes to <code>fun</code>&#8217;s scope</li>
+</ul>
+
+
+<p>The purpose of <code>bind</code> is change current context easier. You don&#8217;t have to create a variable like <code>self</code> to store your context.</p>
+
+<p>All right, how does it help me killing my fat codes? Let&#8217;s look at an example.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I don&#8217;t want to write function() { … } in document ready event, since i&#8217;m calling <code>camera.shoot</code> function, it should be fed directly to event binding argument. So it becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep an eye on <code>camera.shoot</code>, there&#8217;s no <code>()</code> after it. But it&#8217;s not right, the result prints <code>shoot by undefined</code>. Since it&#8217;s &#8220;Function Call&#8221; not &#8220;Object Method&#8221;, the context became global variable, here it is <code>document</code>. To make it right, the context should be <code>camera</code> object. To solve this, I use <code>bind</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This style has three benefits:</p>
+
+<ol>
+<li>No more ugly curly braces.</li>
+<li>Make context of the binding function clearer.</li>
+<li>Separate events binding and function definition.</li>
+</ol>
+
+
+<p>For my personal opinion, I don&#8217;t really like the word <code>bind</code>, I would like to see it more common.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">by</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">owner</span><span class="o">:</span> <span class="s1">&#39;Irena&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">shoot</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;shoot by &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">owner</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">shoot</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">camera</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I love it, aren&#8217;t you?</p>
+
+<h1>Reference</h1>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind">MDN - Function.prototype.bind</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -847,81 +1008,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/06/deploy-static-site-on-heroku/">Deploy Static Site on Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-06T15:57:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>When you just want simple… on heroku</h2>
-
-<p>Sometimes you just want to deploy a simple web which contains one or two static pages, how would you do? You don&#8217;t want to build a rails project merely to serve a couple of static pages. Here&#8217;s a quick guide for you~!</p>
-
-<h2>Environment</h2>
-
-<p>You should not use cedar stack, that&#8217;s not friendly for static sites. (You need to install some gems by yourself, and do some hacks…) bamboo is a good start point.</p>
-
-<pre><code>heroku create --stack bamboo-ree-1.8.7
-</code></pre>
-
-<h2>File structure</h2>
-
-<p>You should create a public folder at root. Put your index.html and stylesheet / js / img folder into &#8220;public&#8221; folder.</p>
-
-<h2>Config</h2>
-
-<p>Last, create a simple config to tell rack middleware how to render the static files…</p>
-
-<pre><code>use Rack::Static, 
-:urls =&gt; ["/stylesheet", "/img", "/js"],
-:root =&gt; "public"
-
-run lambda { |env|
-[
-    200, 
-{
-  'Content-Type'  =&gt; 'text/html', 
-  'Cache-Control' =&gt; 'public, max-age=86400' 
-}, File.open('public/index.html', File::RDONLY)
-] 
-</code></pre>
-
-<p>Then you can commit and push the site to heroku. Here are the official guides if you still do not understand…</p>
-
-<ul>
-<li><p><a href="https://devcenter.heroku.com/articles/static-sites-on-heroku">Static Sites with Ruby on Heroku/Bamboo</a></p></li>
-<li><p><a href="https://devcenter.heroku.com/articles/bamboo">The Badious Bamboo Stack</a></p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -935,6 +1021,10 @@ run lambda { |env|
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/03/25/mailbox/">Mailbox</a>
@@ -970,10 +1060,6 @@ run lambda { |env|
     
       <li class="post">
         <a href="/blog/2012/10/27/first-sunshine/">From the first sun shine to the last moon light</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/11/simcity/">模擬城市，模擬創業</a>
       </li>
     
   </ul>
