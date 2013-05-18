@@ -4,7 +4,7 @@
   <title><![CDATA[Finite Coffee]]></title>
   <link href="http://dale-ma.heroku.com/atom.xml" rel="self"/>
   <link href="http://dale-ma.heroku.com/"/>
-  <updated>2013-05-11T19:51:07+08:00</updated>
+  <updated>2013-05-18T19:22:28+08:00</updated>
   <id>http://dale-ma.heroku.com/</id>
   <author>
     <name><![CDATA[Dale Ma]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Browser atanomy]]></title>
+    <link href="http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy/"/>
+    <updated>2013-05-18T16:48:00+08:00</updated>
+    <id>http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy</id>
+    <content type="html"><![CDATA[<p>Recently, I&#8217;m interested in browser behaviors, here&#8217;s the note after I read a nice article <a href="http://taligarsiel.com/Projects/howbrowserswork1.htm">How browser work</a>.</p>
+
+<ul>
+<li>Browser components
+<img src="images/layers.png" alt="" /></li>
+</ul>
+
+
+<h2>Components - UIs</h2>
+
+<ul>
+<li>UI: Elements except main window. (Address bar, bookmark…)</li>
+<li>UI Backend: Generic elements in main window. (Checkbox, input…)</li>
+</ul>
+
+
+<h2>Components - engines</h2>
+
+<ul>
+<li>Browser engine: Rendering engine interface.</li>
+<li>Rendering engine: draw requested content.</li>
+<li>JS interpreter: run JS.</li>
+</ul>
+
+
+<h2>Components - backends</h2>
+
+<ul>
+<li>Networking: platform independent network interface.</li>
+<li>Data Persistence: data storage.</li>
+</ul>
+
+
+<h1>Render engine</h1>
+
+<p>Main flow:
+1. Parsing HTML and build dom tree.
+2. Render with styling info.
+3. Layout and positioning.
+4. Painting.
+<img src="images/flow.png" alt="" /></p>
+
+<h2>Render engine of Safari &amp; Gecko</h2>
+
+<ul>
+<li>Safari parser flow</li>
+</ul>
+
+
+<p><img src="images/webkitflow.png" alt="" /></p>
+
+<ul>
+<li>Gecko parser flow</li>
+</ul>
+
+
+<p><img src="images/mozillaflow.jpg" alt="" /></p>
+
+<p>Basically equal, but Gecko has a Content Sink process to making DOM elements.</p>
+
+<h1>What does parser do?</h1>
+
+<p><img src="images/parser.png" alt="" /></p>
+
+<p>It breaks the content into lexers (tokenizers), and constructing the parse tree via Syntax rule, then translates result to machine code.</p>
+
+<h2>HTML parser</h2>
+
+<p>HTML is NOT a context free grammar which means it&#8217;s more difficult to implement.</p>
+
+<p><img src="images/htmlparser.png" alt="" /></p>
+
+<p><img src="images/htmlparserflow.gif" alt="" /></p>
+
+<h2>CSS parser</h2>
+
+<p>CSS is a context free grammar which means it could be build via parser generator by providing token definition and syntax.</p>
+
+<p><img src="images/cssparser.png" alt="" /></p>
+
+<h2>The order of parsers</h2>
+
+<h3>Scripts</h3>
+
+<p>Synchronous, top to bottom, only one script could be parsed/executed at a time, excepts &lt;script defer> or &lt;script async>(HTML5).</p>
+
+<h3>Speculative parsing</h3>
+
+<p>While executing script, another thread will fetch the rest scripts in document, for optimization.</p>
+
+<h3>Style sheets</h3>
+
+<p>Asynchronous. Firefox blocks scripts until all css are parsed. Webkit does only when the scripts access unsafe css.</p>
+
+<h1>It&#8217;s not the end</h1>
+
+<p>Next topic will talk about render tree and Layout.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Javascript bind method]]></title>
@@ -715,55 +820,6 @@ run lambda { |env|
 <p>我在上飛機前會先把一些網頁資料開在瀏覽器裡，上飛機的時候有空就會拿出來看。等着過海關的時候，我會盤算我的程式流程要怎麼走，資料庫裡要放些什麼表格。飛機上遇到氣流不穩，我仍然拿著筆電寫著程式，反正我哪也不能去（我的筆電有換上SSD，所以不擔心被機身震動影響）。</p>
 
 <p>目前為止，我蠻滿意這段旅程的工作產出和學習成效。接下來要飛到歐洲搭遊輪，我不打算在遊輪上買貴死人的網路，所以接下來會準備個 7 天份的閱讀資料，上去找時間研讀。在閱讀的你，如果這假日有空，不妨去個沒有網路的咖啡廳，來場“資源受限”的 coding 下午茶試試。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[每日定時寄信 in Rails 3]]></title>
-    <link href="http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler/"/>
-    <updated>2012-06-17T16:43:00+08:00</updated>
-    <id>http://dale-ma.heroku.com/blog/2012/06/17/railsscheduler</id>
-    <content type="html"><![CDATA[<p>先前研究了如何在 <a href="http://dale-ma.heroku.com/blog/2012/06/12/rails-mail/">rails 3 裡寄 e-mail</a>，後來想要設定成類似 crontab 的方式，每天可以自動寄信出來。</p>
-
-<p>於是開始 google &#8220;rails scheduler&#8221;，除了火車時刻表以外，發現了一個簡單的 gem - <a href="https://github.com/jmettraux/rufus-scheduler">Rufus Scheduler</a>。我不需要有 queue 之類的進階功能，我要的很簡單，只要每天可以寄出一封信就可以了。</p>
-
-<p>用了之後發現一切真是該死的簡單，如果你已經有設定好 Mailer，不用 3 分鐘就可以搞定一切！</p>
-
-<h2>步驟</h2>
-
-<h3>安裝 Rufus Scheduler</h3>
-
-<p>設定 Gemfile</p>
-
-<pre><code>gem 'rufus-scheduler'
-</code></pre>
-
-<p>安裝</p>
-
-<pre><code>bundle install
-</code></pre>
-
-<h3>設定 initializer</h3>
-
-<p>建立 &#8230;/config/initializers/task_scheduler.rb</p>
-
-<pre><code>scheduler = Rufus::Scheduler.start_new
-
-scheduler.every("10s") do
-  UserMailer.convert_result.deliver
-end
-</code></pre>
-
-<p>設定為每 10 秒寄一次信是為了要可以快速的確認是否 work 。 <code>UserMailer</code>應該換成自己的 Mailer 。</p>
-
-<p>接著可以改成每天固定時間寄信，這裡設定為每天早上 6 點。</p>
-
-<pre><code>scheduler.cron("0 6 * * *") do
-   UserMailer.convert_result.deliver
-end
-</code></pre>
-
-<p>接下來你可以開始你的寄信服務了，不過請別寄垃圾信過來。</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Finite Coffee</title>
+  <meta name="author" content="Dale Ma">
+
+  
+  <meta name="description" content="被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的&#8221;Octopress&#8221;。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。 在開始之前，需要準備以下工具： Github帳號 (包含git工具，請參考這裡)
+RVM ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/page/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Finite Coffee" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30309389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Finite Coffee</a></h1>
+  
+    <h2>Javascript / Ruby / Simple / Dale Ma</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dale-ma.heroku.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://aboutdale.heroku.com/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/25/first-trial-on-octopress/">Octopress - 章魚先生，你好</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-25T14:05:00+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>被RoR染指了三個禮拜後，開始嘗試轟動台灣萬千RD的&#8221;Octopress&#8221;。感覺，Not BAAAAAAD！如果想找個屎坑來放一些可能沒人看的玩意，可以試試章魚先生。</p>
+
+<p><a href="http://octopress.org"><img class="right" src="http://octopress.org/images/logo.png"></a></p>
+
+<p>在開始之前，需要準備以下工具：</p>
+
+<ul>
+<li>Github帳號 (包含git工具，請參考<a href="http://help.github.com/mac-set-up-git/">這裡</a>)</li>
+<li>RVM (可以擁有多重Ruby版本的套件，安裝方式可以<a href="http://octopress.org/docs/setup/rvm/">看這</a>)</li>
+<li>Ruby 1.9.2 (比較舊版的Ruby，請透過RVM安裝)</li>
+<li>(optional) Heroku帳號，用來發佈你的web，也可以發佈到Github。</li>
+<li>充滿好奇心的小腦袋</li>
+</ul>
+
+
+<h3>Step 1. Install Ruby</h3>
+
+<pre><code>rvm install 1.9.2
+# 下面無法安裝的解法比較花時間，快速的話可以直接下rvm install 1.9.2 --with-gcc=clang
+rvm use 1.9.2
+</code></pre>
+
+<p>如果是Mac可能會遇到gcc是LLVM裝不上的問題，可以看這篇<a href="http://blog.yorkxin.org/2012/03/09/ruby-192-with-xcode-43/">解法</a>或你覺得時間很寶貴，可以直接下</p>
+
+<pre><code>rvm install 1.9.2 --with-gcc=clang
+</code></pre>
+
+<h3>Step 2. Checkout</h3>
+
+<pre><code>cd /PATH/TO/YOUR/DIRECTORY
+git clone git://github.com/imathis/octopress.git # 建議可以先將Octopress Fork到自己的帳戶下再Clone，將來如果想修改核心比較方便
+</code></pre>
+
+<h3>Step 3. Install Octopress</h3>
+
+<pre><code>cd octopress
+bundle install
+rake install
+</code></pre>
+
+<h3>Step 4. Configure</h3>
+
+<p>剛開始只需要修改_config.yml即可，可參考<a href="http://octopress.org/docs/configuring/">官網config教學</a></p>
+
+<h3>Step 5. Post</h3>
+
+<pre><code>rake new_post[YOUR_POST_NAME]
+</code></pre>
+
+<h3>Step 6. Preview</h3>
+
+<pre><code>rake preview
+</code></pre>
+
+<p>然後你就可以看到章魚先生在你的電腦上呈現出你的部落格了！接著你可以發佈到Heroku去，詳細步驟可以參考<a href="http://blog.eddie.com.tw/2011/10/11/how-to-install-octopress-on-heroku/">這裡</a></p>
+
+<h3>完成以上步驟，就可以開始拆解這隻章魚了！</h3>
+
+<p>你可以：</p>
+
+<ul>
+<li>試試<a href="http://octopress.org/docs/blogging/plugins/">plugins</a></li>
+<li>學學<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>，畢竟章魚先生的文章都是用Markdown語法寫的</li>
+<li>當個安分的部落客好好寫文章</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/18/browser-atanomy/">Browser atanomy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/25/mailbox/">Mailbox</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/23/half-drunk-life/">半醉人生</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/23/blink/">Blink 決斷 2 秒間</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/knowledge-generation-2/">知識生產術（二）- 辨別資訊洪流中 1% 本質的技術</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/18/knowledge-generating-method/">知識生產術（一） - Google 化</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/invisible-scrollbar/">Invisible scrollbar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/29/paypal-ipn/">玩網路金流絕不能不知的 PayPal IPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/28/light-life/">松浦彌太郎的輕生活練習</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("eguitarz", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/eguitarz" class="twitter-follow-button" data-show-count="false">Follow @eguitarz</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Dale Ma -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

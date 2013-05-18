@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Browser atanomy - Finite Coffee</title>
+  <meta name="author" content="Dale Ma">
+
+  
+  <meta name="description" content="Recently, I&#8217;m interested in browser behaviors, here&#8217;s the note after I read a nice article How browser work. Browser components &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Finite Coffee" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30309389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Finite Coffee</a></h1>
+  
+    <h2>Javascript / Ruby / Simple / Dale Ma</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dale-ma.heroku.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://aboutdale.heroku.com/">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Browser Atanomy</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T16:48:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently, I&#8217;m interested in browser behaviors, here&#8217;s the note after I read a nice article <a href="http://taligarsiel.com/Projects/howbrowserswork1.htm">How browser work</a>.</p>
+
+<ul>
+<li>Browser components
+<img src="images/layers.png" alt="" /></li>
+</ul>
+
+
+<h2>Components - UIs</h2>
+
+<ul>
+<li>UI: Elements except main window. (Address bar, bookmark…)</li>
+<li>UI Backend: Generic elements in main window. (Checkbox, input…)</li>
+</ul>
+
+
+<h2>Components - engines</h2>
+
+<ul>
+<li>Browser engine: Rendering engine interface.</li>
+<li>Rendering engine: draw requested content.</li>
+<li>JS interpreter: run JS.</li>
+</ul>
+
+
+<h2>Components - backends</h2>
+
+<ul>
+<li>Networking: platform independent network interface.</li>
+<li>Data Persistence: data storage.</li>
+</ul>
+
+
+<h1>Render engine</h1>
+
+<p>Main flow:
+1. Parsing HTML and build dom tree.
+2. Render with styling info.
+3. Layout and positioning.
+4. Painting.
+<img src="images/flow.png" alt="" /></p>
+
+<h2>Render engine of Safari &amp; Gecko</h2>
+
+<ul>
+<li>Safari parser flow</li>
+</ul>
+
+
+<p><img src="images/webkitflow.png" alt="" /></p>
+
+<ul>
+<li>Gecko parser flow</li>
+</ul>
+
+
+<p><img src="images/mozillaflow.jpg" alt="" /></p>
+
+<p>Basically equal, but Gecko has a Content Sink process to making DOM elements.</p>
+
+<h1>What does parser do?</h1>
+
+<p><img src="images/parser.png" alt="" /></p>
+
+<p>It breaks the content into lexers (tokenizers), and constructing the parse tree via Syntax rule, then translates result to machine code.</p>
+
+<h2>HTML parser</h2>
+
+<p>HTML is NOT a context free grammar which means it&#8217;s more difficult to implement.</p>
+
+<p><img src="images/htmlparser.png" alt="" /></p>
+
+<p><img src="images/htmlparserflow.gif" alt="" /></p>
+
+<h2>CSS parser</h2>
+
+<p>CSS is a context free grammar which means it could be build via parser generator by providing token definition and syntax.</p>
+
+<p><img src="images/cssparser.png" alt="" /></p>
+
+<h2>The order of parsers</h2>
+
+<h3>Scripts</h3>
+
+<p>Synchronous, top to bottom, only one script could be parsed/executed at a time, excepts &lt;script defer> or &lt;script async>(HTML5).</p>
+
+<h3>Speculative parsing</h3>
+
+<p>While executing script, another thread will fetch the rest scripts in document, for optimization.</p>
+
+<h3>Style sheets</h3>
+
+<p>Asynchronous. Firefox blocks scripts until all css are parsed. Webkit does only when the scripts access unsafe css.</p>
+
+<h1>It&#8217;s not the end</h1>
+
+<p>Next topic will talk about render tree and Layout.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dale Ma</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T16:48:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy/" data-via="eguitarz" data-counturl="http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/11/javascript-bind-method/" title="Previous Post: Javascript bind method">&laquo; Javascript bind method</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/18/browser-atanomy/">Browser atanomy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/25/mailbox/">Mailbox</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/23/half-drunk-life/">半醉人生</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/23/blink/">Blink 決斷 2 秒間</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/knowledge-generation-2/">知識生產術（二）- 辨別資訊洪流中 1% 本質的技術</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/18/knowledge-generating-method/">知識生產術（一） - Google 化</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/invisible-scrollbar/">Invisible scrollbar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/29/paypal-ipn/">玩網路金流絕不能不知的 PayPal IPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/28/light-life/">松浦彌太郎的輕生活練習</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("eguitarz", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/eguitarz" class="twitter-follow-button" data-show-count="false">Follow @eguitarz</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Dale Ma -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
   <meta name="author" content="Dale Ma">
 
   
-  <meta name="description" content="Recently I was thinking how to make my javascript codes more readable. I tried &#8220;bind&#8221; in Function object and it does help. Function &hellip;">
+  <meta name="description" content="Recently, I&#8217;m interested in browser behaviors, here&#8217;s the note after I read a nice article How browser work. Browser components &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,138 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/browser-atanomy/">Browser Atanomy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T16:48:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently, I&#8217;m interested in browser behaviors, here&#8217;s the note after I read a nice article <a href="http://taligarsiel.com/Projects/howbrowserswork1.htm">How browser work</a>.</p>
+
+<ul>
+<li>Browser components
+<img src="images/layers.png" alt="" /></li>
+</ul>
+
+
+<h2>Components - UIs</h2>
+
+<ul>
+<li>UI: Elements except main window. (Address bar, bookmark…)</li>
+<li>UI Backend: Generic elements in main window. (Checkbox, input…)</li>
+</ul>
+
+
+<h2>Components - engines</h2>
+
+<ul>
+<li>Browser engine: Rendering engine interface.</li>
+<li>Rendering engine: draw requested content.</li>
+<li>JS interpreter: run JS.</li>
+</ul>
+
+
+<h2>Components - backends</h2>
+
+<ul>
+<li>Networking: platform independent network interface.</li>
+<li>Data Persistence: data storage.</li>
+</ul>
+
+
+<h1>Render engine</h1>
+
+<p>Main flow:
+1. Parsing HTML and build dom tree.
+2. Render with styling info.
+3. Layout and positioning.
+4. Painting.
+<img src="images/flow.png" alt="" /></p>
+
+<h2>Render engine of Safari &amp; Gecko</h2>
+
+<ul>
+<li>Safari parser flow</li>
+</ul>
+
+
+<p><img src="images/webkitflow.png" alt="" /></p>
+
+<ul>
+<li>Gecko parser flow</li>
+</ul>
+
+
+<p><img src="images/mozillaflow.jpg" alt="" /></p>
+
+<p>Basically equal, but Gecko has a Content Sink process to making DOM elements.</p>
+
+<h1>What does parser do?</h1>
+
+<p><img src="images/parser.png" alt="" /></p>
+
+<p>It breaks the content into lexers (tokenizers), and constructing the parse tree via Syntax rule, then translates result to machine code.</p>
+
+<h2>HTML parser</h2>
+
+<p>HTML is NOT a context free grammar which means it&#8217;s more difficult to implement.</p>
+
+<p><img src="images/htmlparser.png" alt="" /></p>
+
+<p><img src="images/htmlparserflow.gif" alt="" /></p>
+
+<h2>CSS parser</h2>
+
+<p>CSS is a context free grammar which means it could be build via parser generator by providing token definition and syntax.</p>
+
+<p><img src="images/cssparser.png" alt="" /></p>
+
+<h2>The order of parsers</h2>
+
+<h3>Scripts</h3>
+
+<p>Synchronous, top to bottom, only one script could be parsed/executed at a time, excepts &lt;script defer> or &lt;script async>(HTML5).</p>
+
+<h3>Speculative parsing</h3>
+
+<p>While executing script, another thread will fetch the rest scripts in document, for optimization.</p>
+
+<h3>Style sheets</h3>
+
+<p>Asynchronous. Firefox blocks scripts until all css are parsed. Webkit does only when the scripts access unsafe css.</p>
+
+<h1>It&#8217;s not the end</h1>
+
+<p>Next topic will talk about render tree and Layout.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -957,57 +1089,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/26/how-do-i-train-my-rails-skill/">How Do I Train My Rails Skill?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-26T07:11:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To master a skill, you have to pay 10000 hours in, then you will be the guru in that field.</p>
-
-<p>I believe repeating is the best way to master something well. I practice CRUD almost everyday. How? by building a todo list web site.</p>
-
-<p>It sucks so much time at beginning, but once you are really familiar with Rails, you can create one less than 10 minutes. Such as <a href="http://www.youtube.com/watch?v=5aaHm9VImVE&amp;t=4m0s">this guy</a>, his name is Jserv, he can write an OS prototype in 15 minutes!</p>
-
-<p>In addition to repeating, another thing is tool. You should prepare some tools to increase your speed on developing. Here are some tools worth to try:</p>
-
-<ul>
-<li><a href="http://www.sublimetext.com/2">Sublime 2</a> or <a href="http://www.vim.org/">VIM</a></li>
-<li><a href="http://livereload.com/">Livereload</a>, auto refreshes your browser, it helps you to focus on your code.</li>
-<li><a href="http://inductionapp.com/">Induction</a>, a polyglot database client.</li>
-</ul>
-
-
-<p>Welcome to tell me if you know any goodies to share ~</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1021,6 +1102,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/18/browser-atanomy/">Browser atanomy</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/05/11/javascript-bind-method/">Javascript bind method</a>
@@ -1056,10 +1141,6 @@
     
       <li class="post">
         <a href="/blog/2012/10/28/light-life/">松浦彌太郎的輕生活練習</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/27/first-sunshine/">From the first sun shine to the last moon light</a>
       </li>
     
   </ul>

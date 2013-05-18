@@ -123,12 +123,16 @@
         <lastmod>2013-05-11T19:41:36+08:00</lastmod>
     </url>
     <url>
+        <loc>http://dale-ma.heroku.com/blog/2013/05/18/browser-atanomy/</loc>
+        <lastmod>2013-05-18T19:22:05+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://dale-ma.heroku.com/about/</loc>
         <lastmod>2012-08-06T16:28:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/blog/archives/</loc>
-        <lastmod>2013-05-11T19:41:36+08:00</lastmod>
+        <lastmod>2013-05-18T19:22:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/contact/</loc>
@@ -136,6 +140,6 @@
     </url>
     <url>
         <loc>http://dale-ma.heroku.com/</loc>
-        <lastmod>2013-05-11T19:41:36+08:00</lastmod>
+        <lastmod>2013-05-18T19:22:05+08:00</lastmod>
     </url>
 </urlset>
